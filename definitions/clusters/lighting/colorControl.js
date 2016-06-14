@@ -44,14 +44,14 @@ var colorControl = {
         'ColorPointBY':                 { id: 0x003b, type: 'UINT16' },
         'ColorPointBIntensity':         { id: 0x003c, type: 'UINT8' },
         //TODO
-        'EnhancedCurrentHue':           { id: 0x4000, type: 'UINT16' },
-        'EnhancedColorMode':            { id: 0x4001, type: 'UINT8' },
-        'ColorLoopActive':              { id: 0x4002, type: 'BITMAP8' },
-        'ColorLoopDirection':           { id: 0x4003, type: 'UINT8' },
-        'ColorLoopTime':                { id: 0x4004, type: 'BITMAP8' },
-        'ColorLoopStartEnhancedHue':    { id: 0x0000, type: 'UINT16' },
-        'ColorLoopStoredEnhancedHue':   { id: 0x4006, type: 'UINT8' },
-        'ColorCapabilities':            { id: 0x400A, type: 'BITMAP8' }
+        'EnhancedCurrentHue':           { id: 0x4000, type: null },
+        'EnhancedColorMode':            { id: 0x4001, type: null },
+        'ColorLoopActive':              { id: 0x4002, type: null },
+        'ColorLoopDirection':           { id: 0x4003, type: null },
+        'ColorLoopTime':                { id: 0x4004, type: null },
+        'ColorLoopStartEnhancedHue':    { id: 0x0000, type: null },
+        'ColorLoopStoredEnhancedHue':   { id: 0x4006, type: null },
+        'ColorCapabilities':            { id: 0x400A, type: null }
     },
     cmd: {
         'MoveToHue': 0x00,
