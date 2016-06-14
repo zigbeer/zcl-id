@@ -3,22 +3,22 @@ var generic = {};
 generic.basic = {
     attrId: {
       // Basic Device Information
-        'zclVersion':           { id: 0x0000, type: 'UINT8'     },
-        'appVersion':           { id: 0x0001, type: 'UINT8'     },
-        'stackVersion':         { id: 0x0002, type: 'UINT8'     },
-        'hwVersion':            { id: 0x0003, type: 'UINT8'     },
-        'manufacturerName':     { id: 0x0004, type: 'CHAR_STR'  },
-        'modelId':              { id: 0x0005, type: 'CHAR_STR'  },
-        'dateCode':             { id: 0x0006, type: 'CHAR_STR'  },
-        'powerSource':          { id: 0x0007, type: 'ENUM8'     },
-        'appProfileVersion':    { id: 0x0008, type: 'ENUM8'     },
-        'swBuildId':            { id: 0x4000, type: ''          },  // type??
+        'zclVersion':           { id: 0x0000, type: 'UINT8'   , acl: READ },
+        'appVersion':           { id: 0x0001, type: 'UINT8'   , acl: READ },
+        'stackVersion':         { id: 0x0002, type: 'UINT8'   , acl: READ },
+        'hwVersion':            { id: 0x0003, type: 'UINT8'   , acl: READ },
+        'manufacturerName':     { id: 0x0004, type: 'CHAR_STR', acl: READ },
+        'modelId':              { id: 0x0005, type: 'CHAR_STR', acl: ''},
+        'dateCode':             { id: 0x0006, type: 'CHAR_STR', acl: ''},
+        'powerSource':          { id: 0x0007, type: 'ENUM8'   , acl: ''},
+        'appProfileVersion':    { id: 0x0008, type: 'ENUM8'   , acl: ''},
+        'swBuildId':            { id: 0x4000, type: ''        , acl: ''},  // type??
       // Basic Device Settings
-        'locationDesc':         { id: 0x0010, type: 'CHAR_STR'  },
-        'physicalEnv':          { id: 0x0011, type: 'ENUM8'     },
-        'deviceEnabled':        { id: 0x0012, type: 'BOOLEAN'   },
-        'alarmMask':            { id: 0x0013, type: 'BITMAP8'   },
-        'disableLocalConfig':   { id: 0x0041, type: 'BITMAP8'   },
+        'locationDesc':         { id: 0x0010, type: 'CHAR_STR', acl: READ | WRITE },
+        'physicalEnv':          { id: 0x0011, type: 'ENUM8'   , acl: READ | WRITE },
+        'deviceEnabled':        { id: 0x0012, type: 'BOOLEAN' , acl: READ | WRITE },
+        'alarmMask':            { id: 0x0013, type: 'BITMAP8' , acl: READ | WRITE },
+        'disableLocalConfig':   { id: 0x0014, type: 'BITMAP8' , acl: READ | WRITE },
     },
     cmd: {
         'resetFactDefault': 0x00
