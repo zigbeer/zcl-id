@@ -30,7 +30,7 @@ function isValidArgType(param) {
 zclId.profile = function (profId) {
     // profId: String | Number
     if (!isValidArgType(profId))
-        throw new TypeError('oid should be a number or a string.');
+        throw new TypeError('profId should be a number or a string.');
 
     var profNumber = parseInt(profId),
         profItem;
