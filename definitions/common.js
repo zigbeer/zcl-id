@@ -1,6 +1,8 @@
-var zcl = {};
+var Enum = require('enum');
 
-zcl.aclMask = {
+var common = {};
+
+common.aclMask = new Enum({
     /*** Attribute Access Control - bit masks ***/
     'READ': 0x01,
     'WRITE': 0x02,
@@ -9,23 +11,23 @@ zcl.aclMask = {
     'AUTH_READ': 0x10,
     'AUTH_WRITE': 0x20,
     'CLIENT': 0x80  // TI unique, indicate client side attribute
-};
+});
 
-zcl.profileId = {
+common.profileId = new Enum({
     'IPM': 0x0101,  // Industrial Plant Monitoring
     'HA': 0x0104,   // Home Automation
     'CBA': 0x0105,  // Commercial Building Automation
     'TA': 0x0107,   // Telecom Applications
     'PHHC': 0108,   // Personal Home & Hospital Care
     'SE': 0x0019    // Smart Energy, [TODO] 0x0019?
-};
+});
 
-zcl.direction = {
+common.direction = new Enum({
     "clientToServer": 0,
     "serverToClient": 1
-};
+});
 
-zcl.foundation = {
+common.foundation = new Enum({
     "read": 0,
     "readRsp": 1,
     "write": 2,
@@ -44,16 +46,16 @@ zcl.foundation = {
     "writeStrcut": 15,
     "writeStrcutRsp": 16,
     "max": 17
-};
+});
 
-zcl.cmdDirection = {
+common.cmdDirection = new Enum({
     'SERVER_GENERATED': 0x01,
     'CLIENT_GENERATED': 0x02,
     'SERVER_RECEIVED': 0x04,
     'CLIENT_RECEIVED': 0x08
-};
+});
 
-zcl.deviceId = {
+common.deviceId = new Enum({
     // Generic Device IDs
     'ON_OFF_SWITCH': 0x0000,
     'LEVEL_CONTROL_SWITCH': 0x0001,
@@ -103,9 +105,9 @@ zcl.deviceId = {
     'IAS_ANCILLARY_CONTROL_EQUIPMENT': 0x0401,
     'IAS_ZONE': 0x0402,
     'IAS_WARNING_DEVICE': 0x0403
-};
+});
 
-zcl.clusterId = {
+common.clusterId = new Enum({
     // General Clusters
     'genBasic': 0x0000,
     'genPowerCfg': 0x0001,
@@ -207,9 +209,9 @@ zcl.clusterId = {
     'haDiagnostic': 0x0B05,
 
     'manuSpecificCluster': 0xFFFF
-};
+});
 
-zcl.dataType = {
+common.dataType = new Enum({
     'NO_DATA': 0x00,
     // 0x01 - 0x07 Reserved
     'DATA8': 0x08,
@@ -277,5 +279,6 @@ zcl.dataType = {
     '128_BIT_SEC_KEY': 0xf1,
     // 0xf2 - 0xfe Reserved
     'UNKNOWN': 0xff
-};
+});
 
+module.exports = common;

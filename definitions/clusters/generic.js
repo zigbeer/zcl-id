@@ -3,26 +3,26 @@ var generic = {};
 generic.basic = {
     attrId: {
       // Basic Device Information
-        'zclVersion':           { id: 0x0000, type: 'UINT8'   , acl: READ },
-        'appVersion':           { id: 0x0001, type: 'UINT8'   , acl: READ },
-        'stackVersion':         { id: 0x0002, type: 'UINT8'   , acl: READ },
-        'hwVersion':            { id: 0x0003, type: 'UINT8'   , acl: READ },
-        'manufacturerName':     { id: 0x0004, type: 'CHAR_STR', acl: READ },
-        'modelId':              { id: 0x0005, type: 'CHAR_STR', acl: ''},
-        'dateCode':             { id: 0x0006, type: 'CHAR_STR', acl: ''},
-        'powerSource':          { id: 0x0007, type: 'ENUM8'   , acl: ''},
-        'appProfileVersion':    { id: 0x0008, type: 'ENUM8'   , acl: ''},
-        'swBuildId':            { id: 0x4000, type: ''        , acl: ''},  // type??
+        'zclVersion':           { id: 0x0000, type: 'UINT8'    },
+        'appVersion':           { id: 0x0001, type: 'UINT8'    },
+        'stackVersion':         { id: 0x0002, type: 'UINT8'    },
+        'hwVersion':            { id: 0x0003, type: 'UINT8'    },
+        'manufacturerName':     { id: 0x0004, type: 'CHAR_STR' },
+        'modelId':              { id: 0x0005, type: 'CHAR_STR' },
+        'dateCode':             { id: 0x0006, type: 'CHAR_STR' },
+        'powerSource':          { id: 0x0007, type: 'ENUM8'    },
+        'appProfileVersion':    { id: 0x0008, type: 'ENUM8'    },
+        'swBuildId':            { id: 0x4000, type: ''         },  // type??
       // Basic Device Settings
-        'locationDesc':         { id: 0x0010, type: 'CHAR_STR', acl: READ | WRITE },
-        'physicalEnv':          { id: 0x0011, type: 'ENUM8'   , acl: READ | WRITE },
-        'deviceEnabled':        { id: 0x0012, type: 'BOOLEAN' , acl: READ | WRITE },
-        'alarmMask':            { id: 0x0013, type: 'BITMAP8' , acl: READ | WRITE },
-        'disableLocalConfig':   { id: 0x0014, type: 'BITMAP8' , acl: READ | WRITE },
+        'locationDesc':         { id: 0x0010, type: 'CHAR_STR' },
+        'physicalEnv':          { id: 0x0011, type: 'ENUM8'    },
+        'deviceEnabled':        { id: 0x0012, type: 'BOOLEAN'  },
+        'alarmMask':            { id: 0x0013, type: 'BITMAP8'  },
+        'disableLocalConfig':   { id: 0x0014, type: 'BITMAP8'  },
     },
-    cmd: {
+    cmd: new Eunm({
         'resetFactDefault': 0x00
-    },
+    }),
     cmdRsp: null
 };
 
@@ -31,15 +31,15 @@ generic.groups = {
         'nameSupport':  { id: 0x0000, type: 'BITMAP8'     }
     },
     cmd: {
-        'add': 0x00,
+        '': 0x00,
         'view': 0x01,
         'getMembership': 0x02,
         'remove': 0x03,
         'removeAll': 0x04,
-        'addIfIdentifying': 0x05
+        'IfIdentifying': 0x05
     },
     cmdRsp: {
-        'addRsp': 0x00,
+        'Rsp': 0x00,
         'viewRsp': 0x01,
         'getMembershipRsp': 0x02,
         'removeRsp': 0x03 
@@ -142,29 +142,29 @@ generic.scenes = {
         'currentGroup': { id: 0x0002, type: 'UINT16'    },
         'sceneValid':   { id: 0x0003, type: 'BOOLEAN'   },
         'nameSupport':  { id: 0x0004, type: 'BITMAP8'   },
-        'lastCfgBy':    { id: 0x0005, type: 'IEEE_ADDR' }
+        'lastCfgBy':    { id: 0x0005, type: 'IEEE_R' }
     },
     cmd: {
-        'add': 0x00,
+        '': 0x00,
         'view': 0x01,
         'remove': 0x02,
         'removeAll': 0x03,
         'store': 0x04,
         'recall': 0x05,
         'getSceneMembership': 0x06,
-        'enhancedAdd': 0x40,
+        'enhanced': 0x40,
         'enhancedView': 0x41,
         'copy': 0x42
     // TODO: Duplicate?
     },
     cmdRsp: {
-        'addRsp': 0x00,
+        'Rsp': 0x00,
         'viewRsp': 0x01,
         'removeRsp': 0x02,
         'removeAllRsp': 0x03,
         'storeRsp': 0x04,
         'getSceneMembershipRsp': 0x06,
-        'enhancedAddRsp': 0x40,
+        'enhancedRsp': 0x40,
         'enhancedViewRsp': 0x41,
         'copyRsp': 0x42
     }
@@ -319,22 +319,22 @@ generic.binaryValueBasic = {
 generic.commissioning = {
     attrId: {
     // Startup Parameters Attribute Set - Stack 0x000
-        'shortAddress':          { id: 0x0000, type: 'UINT16'           },
-        'extendedPANId':         { id: 0x0001, type: 'IEEE_ADDR'        },
+        'shortress':          { id: 0x0000, type: 'UINT16'           },
+        'extendedPANId':         { id: 0x0001, type: 'IEEE_R'        },
         'panId':                 { id: 0x0002, type: 'UINT16'           },
         'channelmask':           { id: 0x0003, type: 'BITMAP32'         },
         'protocolVersion':       { id: 0x0004, type: 'UINT8'            },
         'stackProfile':          { id: 0x0005, type: 'UINT8'            },
         'startupControl':        { id: 0x0006, type: 'ENUM8'            },
     // Startup Parameters Attribute Set - Security 0x001  
-        'trustCenterAddress':    { id: 0x0010, type: 'IEEE_ADDR'        },
+        'trustCenterress':    { id: 0x0010, type: 'IEEE_R'        },
         'trustCenterMasterKey':  { id: 0x0011, type: '128_BIT_SEC_KEY'  },
         'networkKey':            { id: 0x0012, type: '128_BIT_SEC_KEY'  },
         'useInsecureJoin':       { id: 0x0013, type: 'BOOLEAN'          },
         'preconfiguredLinkKey':  { id: 0x0014, type: '128_BIT_SEC_KEY'  },
         'networkKeySeqNum':      { id: 0x0015, type: 'UINT8'            },
         'networkKeyType':        { id: 0x0016, type: 'ENUM8'            },
-        'networkManagerAddress': { id: 0x0017, type: 'UINT16'           },
+        'networkManagerress': { id: 0x0017, type: 'UINT16'           },
     // Join Parameters Attribute Set 0x002  
         'scanAttempts':          { id: 0x0020, type: 'UINT8'            },
         'timeBetweenScans':      { id: 0x0021, type: 'UINT16'           },
@@ -345,7 +345,7 @@ generic.commissioning = {
         'parentRetryThreshold':  { id: 0x0031, type: 'UINT8'            },
     // Concentrator Parameters Attribute Set 0x004
         'concentratorFlag':      { id: 0x0040, type: 'BOOLEAN'          },
-        'concentratorRadius':    { id: 0x0041, type: 'UINT8'            },
+        'concentratorRus':    { id: 0x0041, type: 'UINT8'            },
         'concentratorDiscoveryTime': { id: 0x0042, type: 'UINT8'        }
     },
     cmd: null,

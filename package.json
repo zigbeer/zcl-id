@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/simenkid/zcl-id/issues"
   },
-  "homepage": "https://github.com/simenkid/zcl-id#readme"
+  "homepage": "https://github.com/simenkid/zcl-id#readme",
+  "dependencies": {
+    "enum": "^2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
 }
