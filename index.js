@@ -1,18 +1,13 @@
-var zclId = {
-    common: require('./definitions/common.js')
-};
+var fs = require('fs'),
+    _ = require('busyman');
+
+var clusterDefs = JSON.parse(fs.readFileSync(__dirname + '/cluster_defs.json')),
+    clusterWithNewFormat = require('./definitions/clusterWithNewFormat');
+
+var zclId = {};
 
 var zclDefs = {
-    common:   require('./definitions/common.js'),
-    general:  require('./definitions/clusters/general/general.js'),
-    closures: require('./definitions/clusters/closures/closures.js'),
-    hvac:     require('./definitions/clusters/hvac/hvac.js'),
-    lighting: require('./definitions/clusters/lighting/lighting.js'),
-    ms:       require('./definitions/clusters/ms/ms.js'),
-    ss:       require('./definitions/clusters/ss/ss.js'),
-    pi:       require('./definitions/clusters/pi/pi.js'),
-    ha:       require('./definitions/clusters/ha/ha.js'),
-    se:       require('./definitions/clusters/se/se.js'),
+    common: require('./definitions/common.js')
 };
 
 function isValidArgType(param) {
@@ -26,6 +21,15 @@ function isValidArgType(param) {
 
     return isValid;
 }
+
+zclId._getCluster = function (cluster) {
+    if (!zclDefs[cluster]) {
+        zclDefs[cluster] = clusterWithNewFormat(clusterDefs[cluster]);
+        clusterDefs[cluster] = null;
+    }
+
+    return zclDefs[cluster];
+};
 
 zclId.profile = function (profId) {
     // profId: String | Number
@@ -67,138 +71,155 @@ zclId.device = function (profId, devId) {
 
 zclId.cluster = function (cId) {
     // cId: String | Number
-    // { key: 'genBasic', value: 0 }
+    if (!isValidArgType(cId))
+        throw new TypeError('cId should be a number or a string.');
+
+    var cNumber = parseInt(cId),
+        cItem;
+
+    if (!isNaN(cNumber))
+        cId = cNumber;
+
+    cItem = zclDefs.common.clusterId.get(cId);
+
+    return { key: cItem.key, value: cItem.value };          // { key: 'genBasic', value: 0 }
 };
+
 zclId.foundation = function (cmd) {
     // cmd: String | Number
-    // { key: 'read', value: 0 }
+    if (!isValidArgType(cmd))
+        throw new TypeError('cmd should be a number or a string.');
+
+    var cmdNumber = parseInt(cmd),
+        cmdItem;
+
+    if (!isNaN(cmdNumber))
+        cmd = cmdNumber;
+
+    cmdItem = zclDefs.common.foundation.get(cmd);
+
+    return { key: cmdItem.key, value: cmdItem.value };      // { key: 'read', value: 0 }
 };
+
 zclId.functional = function (cId, cmdId) {
     // cId: String | Number, cmdId: String | Number
-    // { key: 'view', value: 1 }
+    if (!isValidArgType(cId))
+        throw new TypeError('cId should be a number or a string.');
+    if (!isValidArgType(cmdId))
+        throw new TypeError('cmdId should be a number or a string.');
+
+    var cNumber = parseInt(cId),
+        cmdNumber = parseInt(cmdId),
+        cItem,
+        cmdItem;
+
+    if (!isNaN(cNumber))
+        cId = cNumber;
+    if (!isNaN(cmdNumber))
+        cmdId = cmdNumber;
+
+    cItem = zclDefs.common.clusterId.get(cId);
+    cInfo = this._getCluster(cItem.key);
+
+    cmdItem = cInfo.cmd.get(cmdId);
+
+    return { key: cmdItem.key, value: cmdItem.value };      // { key: 'view', value: 1 }
 };
+
 zclId.getCmdRsp = function (cId, rspId) {    // TODO
     // cId: String | Number, rspId: String | Number
-    // { key: 'viewRsp', value: 1 }
+    if (!isValidArgType(cId))
+        throw new TypeError('cId should be a number or a string.');
+    if (!isValidArgType(rspId))
+        throw new TypeError('rspId should be a number or a string.');
+
+    var cNumber = parseInt(cId),
+        cmdNumber = parseInt(rspId),
+        cItem,
+        cmdItem,
+        cInfo;
+
+    if (!isNaN(cNumber))
+        cId = cNumber;
+    if (!isNaN(cmdNumber))
+        rspId = cmdNumber;
+
+    cItem = zclDefs.common.clusterId.get(cId);
+    cInfo = this._getCluster(cItem.key);
+
+    cmdItem = cInfo.cmdRsp.get(rspId);
+
+    return { key: cmdItem.key, value: cmdItem.value };      // { key: 'viewRsp', value: 1 }
 };
 
 zclId.attr = function (cId, attrId) {
     // cId: String | Number, attrId: String | Number
-    // { key: 'modelId', value: 5 }
+    if (!isValidArgType(cId))
+        throw new TypeError('cId should be a number or a string.');
+    if (!isValidArgType(attrId))
+        throw new TypeError('attrId should be a number or a string.');
+
+    var cNumber = parseInt(cId),
+        attrNumber = parseInt(attrId),
+        cItem,
+        attrItem,
+        cInfo;
+
+    if (!isNaN(cNumber))
+        cId = cNumber;
+    if (!isNaN(attrNumber))
+        attrId = attrNumber;
+
+    cItem = zclDefs.common.clusterId.get(cId);
+    cInfo = this._getCluster(cItem.key);
+
+    attrItem = cInfo.attr.get(attrId);
+
+    return { key: attrItem.key, value: attrItem.value };    // { key: 'modelId', value: 5 }
 };
 
 zclId.attrType = function (cId, attrId) {
     // cId: String | Number, attrId: String | Number
-    // { key: 'CHAR_STR', value: 66 }
+    if (!isValidArgType(cId))
+        throw new TypeError('cId should be a number or a string.');
+    if (!isValidArgType(attrId))
+        throw new TypeError('attrId should be a number or a string.');
+
+    var cNumber = parseInt(cId),
+        attrNumber = parseInt(attrId),
+        cItem,
+        attrItem,
+        cInfo;
+
+    if (!isNaN(cNumber))
+        cId = cNumber;
+    if (!isNaN(attrNumber))
+        attrId = attrNumber;
+
+    var attrName = zclId.attr(cId, attrId).key;
+
+    cItem = zclDefs.common.clusterId.get(cId);
+    cInfo = this._getCluster(cItem.key);
+
+    attrItem = cInfo.attrType.get(attrName);
+
+    return { key: attrItem.key, value: attrItem.value };    // { key: 'CHAR_STR', value: 66 }
 };
 
 zclId.dataType = function (type) {
     // type: String | Number
-    // { key: 'DATA8', value: 8 }
+    if (!isValidArgType(type))
+        throw new TypeError('dataType should be a number or a string.');
+
+    var typeNumber = parseInt(type),
+        typeItem;
+
+    if (!isNaN(typeNumber))
+        type = typeNumber;
+
+    typeItem = zclDefs.common.dataType.get(type);
+
+    return { key: typeItem.key, value: typeItem.value };    // { key: 'DATA8', value: 8 }
 };
-
-// zcl.getProfId = function (profId) {
-//     var prof = zclDefs.common.profId.get(profId);
-//     return prof ? prof : undefined;  // 'HA': 0x0104
-//     // { name, id }
-// };
-
-// zcl.getDeviceId = function (prof, devId) {
-//     var profIdStr = zcl.profId(prof),
-//         dId;
-
-//     if (profIdStr)
-//         profIdStr = profIdStr.key;
-     
-//     dId = deviceId[prof];
-
-//     if (dId)
-//         return dId.get(devId);  // 'ON_OFF_SWITCH': 0x0000
-//     // { name, id }
-// };
-
-// zcl.getClusterId = function (cId) {
-//     var cluster = zclDefs.common.clusterId.get(cId);
-//     return cluster ? cluster : undefined;  // 'genBasic': 0x0000,
-//     // { name, id }
-// };
-
-// /*zcl.attrId = function (cId, attrId) {
-//     var clusterAttr = clusterAttrs[cId];
-
-//     if (clusterAttr)
-//         return clusterAttr.get(attrId);
-// };*/
-
-// zcl.getDataType = function (type) {
-//     // 'DATA8': 0x08, 'DATA16': 0x09, 'DATA24': 0x0a,, ...
-//     return dataType.get(type);
-//     // { name, id }
-// };
-
-
-// zcl.getFoundationCmd = function (cmd) {
-//     // "read": 0, "readRsp": 1, ...
-//     return fcmd.get(cmd);
-// };
-
-// zcl.getDirection = function (dir) {
-//     // "clientToServer": 0, "serverToClient": 1
-//     return direction.get(dir);
-// };
-
-// zcl.getCmdDirection = function (dir) {
-//     // 'SERVER_GENERATED': 0x01, 'CLIENT_GENERATED': 0x02, ...
-// };
-
-// /*zcl.getAcl = function (acl) {
-//     // aclMask, 'READ': 0x01, 'WRITE': 0x02, ...
-//     return acl.get(acl);
-// };*/
-
-// /*zcl.commands = function (cId) {
-// };*/
-
-// zcl.getCluster = function (cId) {
-//     // return: {
-//     //     attrId: {
-//     //         'ZoneStatus': { id: 0x0002, type: 'BITMAP16'  }, ...
-//     //     },
-//     //     cmd: {
-//     //         'enrollRsp': 0x00, ...
-//     //     },
-//     //     cmdRsp: {
-//     //         'statusChangeNotification': 0x00, ...
-//     //     }
-//     // }
-// };
-
-// zcl.getAttr = function (cId, attrId) {
-//     // Attr: { id: 0x0002, type: 'BITMAP16' }
-
-//     //{ name, id, type }
-// };
-
-// /*zcl.getAttrId = function (cId, attrId) {
-//     var Attr = zcl.getAttr(cId, attrId);
-//     return Attr.value.id;      // 0x0002
-// };
-
-// zcl.getAttrType = function (cId, attrId) {
-//     var Attr = zcl.getAttr(cId, attrId);
-//     return Attr.value.type;    // 'BITMAP16'
-// };*/
-
-// zcl.getCmd = function (cId, cmdId) {
-//     var cmds = zcl.getCluster(cId).cmd;
-//     return cmds.get(cmdId);    // 'add': 0x00
-//     // { name, id }
-// };
-
-// zcl.getCmdRsp = function (cId, rspId) {
-//     var cmdRsps = zcl.getCluster(cId).cmdRsp;
-//     return cmdRsps.get(cmdId); // 'addRsp': 0x00
-//     // { name, id }
-// };
 
 module.exports = zclId;
