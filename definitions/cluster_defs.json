@@ -1,0 +1,45 @@
+{
+    "genBasic":{
+        "attrId":{
+            "zclVersion":{"id":0,"type":"UINT8"},
+            "appVersion":{"id":1,"type":"UINT8"},
+            "stackVersion":{"id":2,"type":"UINT8"},
+            "hwVersion":{"id":3,"type":"UINT8"},
+            "manufacturerName":{"id":4,"type":"CHAR_STR"},
+            "modelId":{"id":5,"type":"CHAR_STR"},
+            "dateCode":{"id":6,"type":"CHAR_STR"},
+            "powerSource":{"id":7,"type":"ENUM8"},
+            "appProfileVersion":{"id":8,"type":"ENUM8"},
+            "swBuildId":{"id":16384,"type":""},
+            "locationDesc":{"id":16,"type":"CHAR_STR"},
+            "physicalEnv":{"id":17,"type":"ENUM8"},
+            "deviceEnabled":{"id":18,"type":"BOOLEAN"},
+            "alarmMask":{"id":19,"type":"BITMAP8"},
+            "disableLocalConfig":{"id":20,"type":"BITMAP8"}
+        },
+        "cmd":{
+            "resetFactDefault":0
+        },
+        "cmdRsp":null
+    },
+    "ssIasZone":{
+        "attrId":{
+            "zoneState":{"id":0,"type":"ENUM8"},
+            "zoneType":{"id":1,"type":"ENUM16"},
+            "zoneStatus":{"id":2,"type":"BITMAP16"},
+            "iasCieAddr":{"id":10,"type":"IEEE_ADDR"},
+            "zoneId":{"id":11,"type":"UINT8"},
+            "numZoneSensitivityLevelsSupported":{"id":12,"type":"UINT8"},
+            "currentZoneSensitivityLevel":{"id":13,"type":"UINT8"}
+        },
+        "cmd":{
+            "enrollRsp": 0,
+            "initNormalOpMode": 1,
+            "initTestMode": 2
+        },
+        "cmdRsp":{
+            "statusChangeNotification": 0,
+            "enrollReq": 1
+        }
+    }
+}

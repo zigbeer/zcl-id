@@ -8,14 +8,32 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simenkid/zcl-id.git"
+    "url": "git+https://github.com/zigbeer/zcl-id.git"
   },
   "author": "Simen Li",
+  "contributors": [
+    {
+      "name": "Hedy Wang",
+      "email": "hedywings@gmail.com"
+    },
+    {
+      "name": "Peter Yi",
+      "email": "peter.eb9@gmail.com"
+    },
+    {
+      "name": "Jack Wu",
+      "email": "jackchased@gmail.com"
+    },
+    {
+      "name": "Eason Chang",
+      "email": "onepiece5478@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/simenkid/zcl-id/issues"
+    "url": "https://github.com/zigbeer/zcl-id/issues"
   },
-  "homepage": "https://github.com/simenkid/zcl-id#readme",
+  "homepage": "https://github.com/zigbeer/zcl-id#readme",
   "dependencies": {
     "enum": "^2.3.0"
   },

@@ -1,7 +1,7 @@
 var fs = require('fs'),
     _ = require('busyman');
 
-var clusterDefs = JSON.parse(fs.readFileSync(__dirname + '/cluster_defs.json')),
+var clusterDefs = JSON.parse(fs.readFileSync(__dirname + '/definitions/cluster_defs.json')),
     clusterWithNewFormat = require('./definitions/clusterWithNewFormat');
 
 var zclId = {};
@@ -85,18 +85,18 @@ zclId.cluster = function (cId) {
     return { key: cItem.key, value: cItem.value };          // { key: 'genBasic', value: 0 }
 };
 
-zclId.foundation = function (cmd) {
-    // cmd: String | Number
-    if (!isValidArgType(cmd))
-        throw new TypeError('cmd should be a number or a string.');
+zclId.foundation = function (cmdId) {
+    // cmdId: String | Number
+    if (!isValidArgType(cmdId))
+        throw new TypeError('cmdId should be a number or a string.');
 
-    var cmdNumber = parseInt(cmd),
+    var cmdNumber = parseInt(cmdId),
         cmdItem;
 
     if (!isNaN(cmdNumber))
-        cmd = cmdNumber;
+        cmdId = cmdNumber;
 
-    cmdItem = zclDefs.common.foundation.get(cmd);
+    cmdItem = zclDefs.common.foundation.get(cmdId);
 
     return { key: cmdItem.key, value: cmdItem.value };      // { key: 'read', value: 0 }
 };
