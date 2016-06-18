@@ -1,9 +1,9 @@
 var hvac = {
-    dihumidificationControl:    require('./dihumidificationControl.js'),
-    fanControl:                 require('./fanControl.js'),
-    pumpConfigControl:          require('./pumpConfigControl.js'),
-    thermostat:                 require('./thermostat.js'),
-    userInterfaceConfig:        require('./userInterfaceConfig.js')
+    hvacDihumidificationControl:    require('./dihumidificationControl.js'),
+    hvacFanControl:                 require('./fanControl.js'),
+    hvacPumpConfigControl:          require('./pumpConfigControl.js'),
+    hvacThermostat:                 require('./thermostat.js'),
+    hvacUserInterfaceConfig:        require('./userInterfaceConfig.js')
 };
 
 module.exports = hvac;

@@ -1,11 +1,11 @@
 var ms = {
-    illuminanceMeasurement:      require('./illuminanceMeasurement.js'),
-    illuminanceLevelSensing:     require('./illuminanceLevelSensing.js'),
-    temperatureMeasurement:      require('./temperatureMeasurement.js'),
-    pressureMeasurement:         require('./pressureMeasurement.js'),
-    flowMeasurement:             require('./flowMeasurement.js'),
-    relativeHumidityMeasurement: require('./relativeHumidityMeasurement.js'),
-    occupancySensing:            require('./occupancySensing.js'),
+    msIlluminanceMeasurement:      require('./illuminanceMeasurement.js'),
+    msIlluminanceLevelSensing:     require('./illuminanceLevelSensing.js'),
+    msTemperatureMeasurement:      require('./temperatureMeasurement.js'),
+    msPressureMeasurement:         require('./pressureMeasurement.js'),
+    msFlowMeasurement:             require('./flowMeasurement.js'),
+    msRelativeHumidityMeasurement: require('./relativeHumidityMeasurement.js'),
+    msOccupancySensing:            require('./occupancySensing.js'),
 };
 
 module.exports = ms;

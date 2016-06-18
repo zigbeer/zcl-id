@@ -1,10 +1,10 @@
 var ha = {
-    applianceEventsAlerts:   require('./applianceEventsAlerts.js'),
-    applianceIdentification: require('./applianceIdentification.js'),
-    applianceStatistics:     require('./applianceStatistics.js'),
-    diagnostic:              require('./diagnostic.js'),
-    electricalMeasurement:   require('./electricalMeasurement.js'),
-    meterIdentification:     require('./meterIdentification.js'),
+    haApplianceEventsAlerts:   require('./applianceEventsAlerts.js'),
+    haApplianceIdentification: require('./applianceIdentification.js'),
+    haApplianceStatistics:     require('./applianceStatistics.js'),
+    haDiagnostic:              require('./diagnostic.js'),
+    haElectricalMeasurement:   require('./electricalMeasurement.js'),
+    haMeterIdentification:     require('./meterIdentification.js'),
 };
 
 module.exports = ha;

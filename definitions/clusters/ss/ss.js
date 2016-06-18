@@ -1,7 +1,7 @@
 var ss = {
-    iasZone: require('./iasZone.js'),
-    iasAce:  require('./iasAce.js'),
-    iasWd:   require('./iasWd.js')
+    ssIasZone: require('./iasZone.js'),
+    ssIasAce:  require('./iasAce.js'),
+    ssIasWd:   require('./iasWd.js')
 };
 
 module.exports = ss;

@@ -1,13 +1,33 @@
 var fs = require('fs'),
-    _ = require('busyman');
+    _ = require('busyman'),
+    Enum = require('enum');
 
-var clusterDefs = JSON.parse(fs.readFileSync(__dirname + '/definitions/cluster_defs.json')),
+var _common = JSON.parse(fs.readFileSync(__dirname + '/definitions/common.json')),
+    _clusterDefs = JSON.parse(fs.readFileSync(__dirname + '/definitions/cluster_defs.json')),
     clusterWithNewFormat = require('./definitions/clusterWithNewFormat');
 
-var zclId = {};
+var zclId = {
+    _common: _common,
+    profileId: null,
+    clusterId: null,
+    foundation: null,
+    dataType: null,
+    deviceId: {
+        HA: null
+    }
+};
+
+/*************************************************************************************************/
+/*** Loading Enumerations                                                                      ***/
+/*************************************************************************************************/
+zclId.profileId = new Enum(_common.profileId);
+zclId.clusterId = new Enum(_common.clusterId);
+zclId.foundationId = new Enum(_common.foundation);
+zclId.dataTypeId = new Enum(_common.dataType);
+zclId.deviceId.HA = new Enum(_common.haDevId);
 
 var zclDefs = {
-    common: require('./definitions/common.js')
+    
 };
 
 function isValidArgType(param) {
@@ -22,10 +42,13 @@ function isValidArgType(param) {
     return isValid;
 }
 
+/*************************************************************************************************/
+/*** zclId Methods                                                                             ***/
+/*************************************************************************************************/
 zclId._getCluster = function (cluster) {
     if (!zclDefs[cluster]) {
-        zclDefs[cluster] = clusterWithNewFormat(clusterDefs[cluster]);
-        clusterDefs[cluster] = null;
+        zclDefs[cluster] = clusterWithNewFormat(_clusterDefs[cluster]);
+        _clusterDefs[cluster] = null;
     }
 
     return zclDefs[cluster];
@@ -42,15 +65,17 @@ zclId.profile = function (profId) {
     if (!isNaN(profNumber))
         profId = profNumber;
 
-    profItem = zclDefs.common.profileId.get(profId);
+    profItem = zclId.profileId.get(profId);
 
-    return { key: profItem.key, value: profItem.value };    // { key: 'HA', value: 260 }
+    if (profItem)
+        return { key: profItem.key, value: profItem.value };    // { key: 'HA', value: 260 }
 };
 
 zclId.device = function (profId, devId) {
     // profId: String | Number, devId: String | Number
     if (!isValidArgType(profId))
         throw new TypeError('profId should be a number or a string.');
+
     if (!isValidArgType(devId))
         throw new TypeError('devId should be a number or a string.');
 
@@ -61,12 +86,15 @@ zclId.device = function (profId, devId) {
 
     if (!isNaN(profNumber))
         profId = profNumber;
+
     if (!isNaN(devNumber))
         devId = devNumber;
 
-    devItem = zclDefs.common.deviceId.get(devId);
+    profItem = zclId.profileId.get(profId);
+    devItem = zclId.deviceId[profItem.key].get(devId);
 
-    return { key: devItem.key, value: devItem.value };      // { key: 'ON_OFF_SWITCH', value: 0 }
+    if (devItem)
+        return { key: devItem.key, value: devItem.value };      // { key: 'ON_OFF_SWITCH', value: 0 }
 };
 
 zclId.cluster = function (cId) {
@@ -80,9 +108,10 @@ zclId.cluster = function (cId) {
     if (!isNaN(cNumber))
         cId = cNumber;
 
-    cItem = zclDefs.common.clusterId.get(cId);
+    cItem = zclId.clusterId.get(cId);
 
-    return { key: cItem.key, value: cItem.value };          // { key: 'genBasic', value: 0 }
+    if (cItem)
+        return { key: cItem.key, value: cItem.value };          // { key: 'genBasic', value: 0 }
 };
 
 zclId.foundation = function (cmdId) {
@@ -96,15 +125,17 @@ zclId.foundation = function (cmdId) {
     if (!isNaN(cmdNumber))
         cmdId = cmdNumber;
 
-    cmdItem = zclDefs.common.foundation.get(cmdId);
+    cmdItem = zclId.foundationId.get(cmdId);
 
-    return { key: cmdItem.key, value: cmdItem.value };      // { key: 'read', value: 0 }
+    if (cmdItem)
+        return { key: cmdItem.key, value: cmdItem.value };      // { key: 'read', value: 0 }
 };
 
 zclId.functional = function (cId, cmdId) {
     // cId: String | Number, cmdId: String | Number
     if (!isValidArgType(cId))
         throw new TypeError('cId should be a number or a string.');
+
     if (!isValidArgType(cmdId))
         throw new TypeError('cmdId should be a number or a string.');
 
@@ -115,21 +146,24 @@ zclId.functional = function (cId, cmdId) {
 
     if (!isNaN(cNumber))
         cId = cNumber;
+
     if (!isNaN(cmdNumber))
         cmdId = cmdNumber;
 
-    cItem = zclDefs.common.clusterId.get(cId);
-    cInfo = this._getCluster(cItem.key);
+    cItem = zclId.clusterId.get(cId);
+    cInfo = zclId._getCluster(cItem.key);
 
     cmdItem = cInfo.cmd.get(cmdId);
 
-    return { key: cmdItem.key, value: cmdItem.value };      // { key: 'view', value: 1 }
+    if (cmdItem)
+        return { key: cmdItem.key, value: cmdItem.value };      // { key: 'view', value: 1 }
 };
 
 zclId.getCmdRsp = function (cId, rspId) {    // TODO
     // cId: String | Number, rspId: String | Number
     if (!isValidArgType(cId))
         throw new TypeError('cId should be a number or a string.');
+
     if (!isValidArgType(rspId))
         throw new TypeError('rspId should be a number or a string.');
 
@@ -141,21 +175,24 @@ zclId.getCmdRsp = function (cId, rspId) {    // TODO
 
     if (!isNaN(cNumber))
         cId = cNumber;
+
     if (!isNaN(cmdNumber))
         rspId = cmdNumber;
 
-    cItem = zclDefs.common.clusterId.get(cId);
-    cInfo = this._getCluster(cItem.key);
+    cItem = zclId.clusterId.get(cId);
+    cInfo = zclId._getCluster(cItem.key);
 
     cmdItem = cInfo.cmdRsp.get(rspId);
 
-    return { key: cmdItem.key, value: cmdItem.value };      // { key: 'viewRsp', value: 1 }
+    if (cmdItem)
+        return { key: cmdItem.key, value: cmdItem.value };      // { key: 'viewRsp', value: 1 }
 };
 
 zclId.attr = function (cId, attrId) {
     // cId: String | Number, attrId: String | Number
     if (!isValidArgType(cId))
         throw new TypeError('cId should be a number or a string.');
+
     if (!isValidArgType(attrId))
         throw new TypeError('attrId should be a number or a string.');
 
@@ -167,21 +204,24 @@ zclId.attr = function (cId, attrId) {
 
     if (!isNaN(cNumber))
         cId = cNumber;
+
     if (!isNaN(attrNumber))
         attrId = attrNumber;
 
-    cItem = zclDefs.common.clusterId.get(cId);
-    cInfo = this._getCluster(cItem.key);
+    cItem = zclId.clusterId.get(cId);
+    cInfo = zclId._getCluster(cItem.key);
 
     attrItem = cInfo.attr.get(attrId);
 
-    return { key: attrItem.key, value: attrItem.value };    // { key: 'modelId', value: 5 }
+    if (attrItem)
+        return { key: attrItem.key, value: attrItem.value };    // { key: 'modelId', value: 5 }
 };
 
 zclId.attrType = function (cId, attrId) {
     // cId: String | Number, attrId: String | Number
     if (!isValidArgType(cId))
         throw new TypeError('cId should be a number or a string.');
+
     if (!isValidArgType(attrId))
         throw new TypeError('attrId should be a number or a string.');
 
@@ -189,21 +229,23 @@ zclId.attrType = function (cId, attrId) {
         attrNumber = parseInt(attrId),
         cItem,
         attrItem,
+        attrName,
         cInfo;
 
     if (!isNaN(cNumber))
         cId = cNumber;
+
     if (!isNaN(attrNumber))
         attrId = attrNumber;
 
-    var attrName = zclId.attr(cId, attrId).key;
+    cItem = zclId.clusterId.get(cId);
+    cInfo = zclId._getCluster(cItem.key);
 
-    cItem = zclDefs.common.clusterId.get(cId);
-    cInfo = this._getCluster(cItem.key);
-
+    attrName = zclId.attr(cId, attrId).key;
     attrItem = cInfo.attrType.get(attrName);
 
-    return { key: attrItem.key, value: attrItem.value };    // { key: 'CHAR_STR', value: 66 }
+    if (attrItem)
+        return { key: attrItem.key, value: attrItem.value };    // { key: 'CHAR_STR', value: 66 }
 };
 
 zclId.dataType = function (type) {
@@ -217,9 +259,10 @@ zclId.dataType = function (type) {
     if (!isNaN(typeNumber))
         type = typeNumber;
 
-    typeItem = zclDefs.common.dataType.get(type);
+    typeItem = zclId.dataTypeId.get(type);
 
-    return { key: typeItem.key, value: typeItem.value };    // { key: 'DATA8', value: 8 }
+    if (typeItem)
+        return { key: typeItem.key, value: typeItem.value };    // { key: 'DATA8', value: 8 }
 };
 
 module.exports = zclId;

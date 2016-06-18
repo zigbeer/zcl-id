@@ -1,5 +1,5 @@
 var se = {
-    simpleMetering: require('./simpleMetering.js')
+    seSimpleMetering: require('./simpleMetering.js')
 };
 
 module.exports = se;
