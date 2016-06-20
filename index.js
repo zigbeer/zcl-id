@@ -26,10 +26,6 @@ zclId.foundationId = new Enum(_common.foundation);
 zclId.dataTypeId = new Enum(_common.dataType);
 zclId.deviceId.HA = new Enum(_common.haDevId);
 
-var zclDefs = {
-    
-};
-
 function isValidArgType(param) {
     var isValid = true;
 
@@ -241,6 +237,7 @@ zclId.attrType = function (cId, attrId) {
         cItem,
         attrItem,
         attrName,
+        attrType,
         cInfo;
 
     if (!isNaN(cNumber))
@@ -256,11 +253,13 @@ zclId.attrType = function (cId, attrId) {
 
     attrName = zclId.attr(cId, attrId);
 
-    if (cInfo.attrType && attrName)
+    if (cInfo.attrType && attrName) {
         attrItem = cInfo.attrType.get(attrName.key);
+        attrType = zclId.dataType(attrItem.value);
+    }
 
-    if (attrItem)
-        return { key: attrItem.key, value: attrItem.value };    // { key: 'CHAR_STR', value: 66 }
+    if (attrType)
+        return { key: attrType.key, value: attrType.value };    // { key: 'CHAR_STR', value: 66 }
 };
 
 zclId.dataType = function (type) {

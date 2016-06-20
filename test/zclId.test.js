@@ -537,8 +537,9 @@ describe('Module Methods Check', function() {
                 }
 
                 attrIdKeys.forEach(function (akey) {
-                    var hitA = zclId.attrType(ckey, akey),
-                        hitB = zclId[ckey].attrType.get(akey);
+                    var dataType = zclId[ckey].attrType.get(akey),
+                        hitA = zclId.attrType(ckey, akey),
+                        hitB = zclId.dataType(dataType.value);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -559,8 +560,9 @@ describe('Module Methods Check', function() {
 
                 attrIdVals.forEach(function (aval) {
                     var attrId = zclId.attr(ckey, aval),
+                        dataType = zclId[ckey].attrType.get(attrId.key),
                         hitA = zclId.attrType(ckey, aval),
-                        hitB = zclId[ckey].attrType.get(attrId.key);
+                        hitB = zclId.dataType(dataType.value);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -582,8 +584,9 @@ describe('Module Methods Check', function() {
                 }
 
                 attrIdKeys.forEach(function (akey) {
-                    var hitA = zclId.attrType(cval, akey),
-                        hitB = zclId[cId.key].attrType.get(akey);
+                    var dataType = zclId[cId.key].attrType.get(akey),
+                        hitA = zclId.attrType(cval, akey),
+                        hitB = zclId.dataType(dataType.value);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -606,8 +609,9 @@ describe('Module Methods Check', function() {
 
                 attrIdVals.forEach(function (aval) {
                     var attrId = zclId.attr(cval, aval),
+                        dataType = zclId[cId.key].attrType.get(attrId.key),
                         hitA = zclId.attrType(cval, aval),
-                        hitB = zclId[cId.key].attrType.get(attrId.key);
+                        hitB = zclId.dataType(dataType.value);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
