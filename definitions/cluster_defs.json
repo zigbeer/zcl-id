@@ -108,7 +108,7 @@
     "genAlarms": {
         "attrId":{
             "alarmCount":{"id":0,"type":"UINT16"}},
-        "cmd":{"reset":0,"resetAll":1,"get":2,"resetLog":3,"publishEventLog":4},
+        "cmd":{"reset":0,"resetAll":1,"getAlarm":2,"resetLog":3,"publishEventLog":4},
         "cmdRsp":{"alarm":0,"getRsp":1,"getEventLog":2}},
     "genTime": {
         "attrId":{

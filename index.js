@@ -46,12 +46,12 @@ function isValidArgType(param) {
 /*** zclId Methods                                                                             ***/
 /*************************************************************************************************/
 zclId._getCluster = function (cluster) {
-    if (!zclDefs[cluster]) {
-        zclDefs[cluster] = clusterWithNewFormat(_clusterDefs[cluster]);
+    if (!zclId[cluster]) {
+        zclId[cluster] = clusterWithNewFormat(_clusterDefs[cluster]);
         _clusterDefs[cluster] = null;
     }
 
-    return zclDefs[cluster];
+    return zclId[cluster];
 };
 
 zclId.profile = function (profId) {
@@ -91,7 +91,9 @@ zclId.device = function (profId, devId) {
         devId = devNumber;
 
     profItem = zclId.profileId.get(profId);
-    devItem = zclId.deviceId[profItem.key].get(devId);
+
+    if (profItem)
+        devItem = zclId.deviceId[profItem.key].get(devId);
 
     if (devItem)
         return { key: devItem.key, value: devItem.value };      // { key: 'ON_OFF_SWITCH', value: 0 }
@@ -151,9 +153,12 @@ zclId.functional = function (cId, cmdId) {
         cmdId = cmdNumber;
 
     cItem = zclId.clusterId.get(cId);
-    cInfo = zclId._getCluster(cItem.key);
 
-    cmdItem = cInfo.cmd.get(cmdId);
+    if (cItem)
+        cInfo = zclId._getCluster(cItem.key);
+
+    if (cInfo.cmd)
+        cmdItem = cInfo.cmd.get(cmdId);
 
     if (cmdItem)
         return { key: cmdItem.key, value: cmdItem.value };      // { key: 'view', value: 1 }
@@ -180,9 +185,12 @@ zclId.getCmdRsp = function (cId, rspId) {    // TODO
         rspId = cmdNumber;
 
     cItem = zclId.clusterId.get(cId);
-    cInfo = zclId._getCluster(cItem.key);
 
-    cmdItem = cInfo.cmdRsp.get(rspId);
+    if (cItem)
+        cInfo = zclId._getCluster(cItem.key);
+
+    if (cInfo.cmdRsp)
+        cmdItem = cInfo.cmdRsp.get(rspId);
 
     if (cmdItem)
         return { key: cmdItem.key, value: cmdItem.value };      // { key: 'viewRsp', value: 1 }
@@ -209,9 +217,12 @@ zclId.attr = function (cId, attrId) {
         attrId = attrNumber;
 
     cItem = zclId.clusterId.get(cId);
-    cInfo = zclId._getCluster(cItem.key);
 
-    attrItem = cInfo.attr.get(attrId);
+    if (cItem)
+        cInfo = zclId._getCluster(cItem.key);
+
+    if (cInfo.attr)
+        attrItem = cInfo.attr.get(attrId);
 
     if (attrItem)
         return { key: attrItem.key, value: attrItem.value };    // { key: 'modelId', value: 5 }
@@ -239,10 +250,14 @@ zclId.attrType = function (cId, attrId) {
         attrId = attrNumber;
 
     cItem = zclId.clusterId.get(cId);
-    cInfo = zclId._getCluster(cItem.key);
 
-    attrName = zclId.attr(cId, attrId).key;
-    attrItem = cInfo.attrType.get(attrName);
+    if (cItem)
+        cInfo = zclId._getCluster(cItem.key);
+
+    attrName = zclId.attr(cId, attrId);
+
+    if (cInfo.attrType && attrName)
+        attrItem = cInfo.attrType.get(attrName.key);
 
     if (attrItem)
         return { key: attrItem.key, value: attrItem.value };    // { key: 'CHAR_STR', value: 66 }

@@ -153,7 +153,6 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.device('HA', '5'); }).not.to.throw(Error);
             expect(function () { return zclId.device('HA', 0x0005); }).not.to.throw(Error);
             expect(function () { return zclId.device('HA', 'CONFIGURATION_TOOL'); }).not.to.throw(Error);
-
         });
 
     });
@@ -179,7 +178,6 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.cluster(0x0003); }).not.to.throw(Error);
             expect(function () { return zclId.cluster('0x0003'); }).not.to.throw(Error);
             expect(function () { return zclId.cluster('genIdentify'); }).not.to.throw(Error);
-
         });
     });
 
@@ -204,7 +202,6 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.foundation(0x0003); }).not.to.throw(Error);
             expect(function () { return zclId.foundation('0x0003'); }).not.to.throw(Error);
             expect(function () { return zclId.foundation('writeUndiv'); }).not.to.throw(Error);
-
         });
     });
 
@@ -234,7 +231,7 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.functional(new Date(), '5'); }).to.throw(TypeError);
             expect(function () { return zclId.functional(function () {}, '5'); }).to.throw(TypeError);
 
-                        expect(function () { return zclId.functional(); }).to.throw(TypeError);
+            expect(function () { return zclId.functional(); }).to.throw(TypeError);
             expect(function () { return zclId.functional(undefined, 0x0005); }).to.throw(TypeError);
             expect(function () { return zclId.functional(null, 0x0005); }).to.throw(TypeError);
             expect(function () { return zclId.functional(NaN, 0x0005); }).to.throw(TypeError);
@@ -254,22 +251,22 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.functional(new Date(), 'writeNoRsp'); }).to.throw(TypeError);
             expect(function () { return zclId.functional(function () {}, 'writeNoRsp'); }).to.throw(TypeError);
 
-            // expect(function () { return zclId.functional(5, 5); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(5, '5'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(5, 0x05); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(5, 'recall'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('5', 5); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('5', '5'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('5', 0x05); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('5', 'recall'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(0x0005, 5); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(0x0005, '5'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(0x0005, 0x05); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(0x0005, 'recall'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('genScenes', 5); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('genScenes', '5'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('genScenes', 0x05); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('genScenes', 'recall'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(5, 5); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(5, '5'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(5, 0x05); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(5, 'recall'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('5', 5); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('5', '5'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('5', 0x05); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('5', 'recall'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(0x0005, 5); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(0x0005, '5'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(0x0005, 0x05); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(0x0005, 'recall'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('genScenes', 5); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('genScenes', '5'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('genScenes', 0x05); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('genScenes', 'recall'); }).not.to.throw(Error);
         });
 
         it('should throw TypeError if input cmdId is not a number and not a string', function () {
@@ -313,22 +310,22 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.functional('genScenes', new Date()); }).to.throw(TypeError);
             expect(function () { return zclId.functional('genScenes', function () {}); }).to.throw(TypeError);
 
-            // expect(function () { return zclId.functional(5, 5); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(5, '5'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(5, 0x05); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(5, 'recall'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('5', 5); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('5', '5'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('5', 0x05); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('5', 'recall'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(0x0005, 5); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(0x0005, '5'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(0x0005, 0x05); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional(0x0005, 'recall'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('genScenes', 5); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('genScenes', '5'); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('genScenes', 0x05); }).not.to.throw(Error);
-            // expect(function () { return zclId.functional('genScenes', 'recall'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(5, 5); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(5, '5'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(5, 0x05); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(5, 'recall'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('5', 5); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('5', '5'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('5', 0x05); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('5', 'recall'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(0x0005, 5); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(0x0005, '5'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(0x0005, 0x05); }).not.to.throw(Error);
+            expect(function () { return zclId.functional(0x0005, 'recall'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('genScenes', 5); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('genScenes', '5'); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('genScenes', 0x05); }).not.to.throw(Error);
+            expect(function () { return zclId.functional('genScenes', 'recall'); }).not.to.throw(Error);
         });
     });
 
@@ -378,22 +375,22 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.getCmdRsp(new Date(), 'Rsp'); }).to.throw(TypeError);
             expect(function () { return zclId.getCmdRsp(function () {}, 'Rsp'); }).to.throw(TypeError);
 
-            // expect(function () { return zclId.getCmdRsp(5, 0); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(5, '0'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(5, 0x00); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(5, 'Rsp'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('5', 0); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('5', '0'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('5', 0x00); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('5', 'Rsp'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(0x0005, 0); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(0x0005, '0'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(0x0005, 0x00); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(0x0005, 'Rsp'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('genScenes', 0); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('genScenes', '0'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('genScenes', 0x00); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('genScenes', 'Rsp'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(5, 0); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(5, '0'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(5, 0x00); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(5, 'Rsp'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('5', 0); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('5', '0'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('5', 0x00); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('5', 'Rsp'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(0x0005, 0); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(0x0005, '0'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(0x0005, 0x00); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(0x0005, 'Rsp'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('genScenes', 0); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('genScenes', '0'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('genScenes', 0x00); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('genScenes', 'Rsp'); }).not.to.throw(Error);
         });
 
         it('should throw TypeError if input rspId is not a number and not a string', function () {
@@ -437,22 +434,22 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.getCmdRsp('genScenes', new Date()); }).to.throw(TypeError);
             expect(function () { return zclId.getCmdRsp('genScenes', function () {}); }).to.throw(TypeError);
 
-            // expect(function () { return zclId.getCmdRsp(5, 0); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(5, '0'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(5, 0x00); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(5, 'Rsp'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('5', 0); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('5', '0'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('5', 0x00); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('5', 'Rsp'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(0x0005, 0); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(0x0005, '0'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(0x0005, 0x00); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp(0x0005, 'Rsp'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('genScenes', 0); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('genScenes', '0'); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('genScenes', 0x00); }).not.to.throw(Error);
-            // expect(function () { return zclId.getCmdRsp('genScenes', 'Rsp'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(5, 0); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(5, '0'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(5, 0x00); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(5, 'Rsp'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('5', 0); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('5', '0'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('5', 0x00); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('5', 'Rsp'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(0x0005, 0); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(0x0005, '0'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(0x0005, 0x00); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp(0x0005, 'Rsp'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('genScenes', 0); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('genScenes', '0'); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('genScenes', 0x00); }).not.to.throw(Error);
+            expect(function () { return zclId.getCmdRsp('genScenes', 'Rsp'); }).not.to.throw(Error);
         });
     });
 
@@ -502,22 +499,22 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.attr(new Date(), 'currentGroup'); }).to.throw(TypeError);
             expect(function () { return zclId.attr(function () {}, 'currentGroup'); }).to.throw(TypeError);
 
-            // expect(function () { return zclId.attr(5, 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(5, '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(5, 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(5, 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('5', 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('5', '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('5', 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('5', 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(0x0005, 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(0x0005, '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(0x0005, 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(0x0005, 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('genScenes', 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('genScenes', '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('genScenes', 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('genScenes', 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(5, 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(5, '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(5, 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(5, 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('5', 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('5', '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('5', 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('5', 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(0x0005, 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(0x0005, '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(0x0005, 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(0x0005, 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('genScenes', 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('genScenes', '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('genScenes', 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('genScenes', 'currentGroup'); }).not.to.throw(Error);
         });
 
         it('should throw TypeError if input attrId is not a number and not a string', function () {
@@ -561,22 +558,22 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.attr('genScenes', new Date()); }).to.throw(TypeError);
             expect(function () { return zclId.attr('genScenes', function () {}); }).to.throw(TypeError);
 
-            // expect(function () { return zclId.attr(5, 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(5, '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(5, 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(5, 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('5', 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('5', '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('5', 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('5', 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(0x0005, 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(0x0005, '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(0x0005, 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr(0x0005, 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('genScenes', 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('genScenes', '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('genScenes', 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attr('genScenes', 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(5, 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(5, '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(5, 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(5, 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('5', 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('5', '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('5', 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('5', 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(0x0005, 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(0x0005, '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(0x0005, 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attr(0x0005, 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('genScenes', 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('genScenes', '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('genScenes', 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attr('genScenes', 'currentGroup'); }).not.to.throw(Error);
         });
     });
 
@@ -626,22 +623,22 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.attrType(new Date(), 'currentGroup'); }).to.throw(TypeError);
             expect(function () { return zclId.attrType(function () {}, 'currentGroup'); }).to.throw(TypeError);
 
-            // expect(function () { return zclId.attrType(5, 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(5, '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(5, 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(5, 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('5', 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('5', '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('5', 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('5', 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(0x0005, 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(0x0005, '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(0x0005, 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(0x0005, 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('genScenes', 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('genScenes', '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('genScenes', 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('genScenes', 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(5, 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(5, '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(5, 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(5, 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('5', 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('5', '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('5', 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('5', 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(0x0005, 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(0x0005, '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(0x0005, 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(0x0005, 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('genScenes', 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('genScenes', '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('genScenes', 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('genScenes', 'currentGroup'); }).not.to.throw(Error);
         });
 
         it('should throw TypeError if input attrId is not a number and not a string', function () {
@@ -685,22 +682,22 @@ describe('APIs Arguments Check for Throwing Error', function() {
             expect(function () { return zclId.attrType('genScenes', new Date()); }).to.throw(TypeError);
             expect(function () { return zclId.attrType('genScenes', function () {}); }).to.throw(TypeError);
 
-            // expect(function () { return zclId.attrType(5, 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(5, '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(5, 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(5, 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('5', 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('5', '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('5', 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('5', 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(0x0005, 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(0x0005, '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(0x0005, 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType(0x0005, 'currentGroup'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('genScenes', 2); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('genScenes', '2'); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('genScenes', 0x0002); }).not.to.throw(Error);
-            // expect(function () { return zclId.attrType('genScenes', 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(5, 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(5, '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(5, 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(5, 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('5', 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('5', '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('5', 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('5', 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(0x0005, 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(0x0005, '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(0x0005, 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType(0x0005, 'currentGroup'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('genScenes', 2); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('genScenes', '2'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('genScenes', 0x0002); }).not.to.throw(Error);
+            expect(function () { return zclId.attrType('genScenes', 'currentGroup'); }).not.to.throw(Error);
         });
     });
 
