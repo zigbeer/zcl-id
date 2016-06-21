@@ -42,12 +42,19 @@ function isValidArgType(param) {
 /*** zclId Methods                                                                             ***/
 /*************************************************************************************************/
 zclId._getCluster = function (cluster) {
-    if (!zclId[cluster]) {
+    if (zclId[cluster]) {
+        return zclId[cluster];
+    } else if (_clusterDefs[cluster]) {
         zclId[cluster] = clusterWithNewFormat(_clusterDefs[cluster]);
         _clusterDefs[cluster] = null;
+        return zclId[cluster];
     }
-
-    return zclId[cluster];
+    // return: {
+    //     attr,
+    //     attrType,
+    //     cmd,
+    //     cmdRsp
+    // }
 };
 
 zclId.profile = function (profId) {

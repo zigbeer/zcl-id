@@ -235,7 +235,7 @@
         "attrId": 233,
         "bacOid": 234,
         "ieeeAddr": 240,
-        "_128BitSecKey": 241,
+        "secKey": 241,
         "unknown": 255
     }
 }
