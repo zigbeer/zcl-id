@@ -1,4 +1,5 @@
 # zcl-id
+An utility for getting ZCL identifiers defined by ZigBee Cluster Library.  
 
 <br />
 
@@ -22,7 +23,7 @@
 <a name="Overview"></a>
 ## 1. Overview  
 
-**zcl-id** is a dictionary of identifiers defined by [_ZIGBEE CLUSTER LIBRARY SPECIFICATION_](https://github.com/zigbeer/documents/blob/master/zcl-id/ZIGBEE_CLUSTER_LIBRARY_SPECIFICATION.pdf).  
+**zcl-id** is a dictionary of identifiers defined by [_ZigBee Cluster Library Specification_](https://github.com/zigbeer/documents/blob/master/zcl-id/ZIGBEE_CLUSTER_LIBRARY_SPECIFICATION.pdf).  
 
 <br />
 
@@ -36,48 +37,57 @@
 <a name="Usage"></a>
 ## 3. Usage  
 
-**zcl-id** provides you with [APIs](#APIs), to get the key-value pair of Zigbee Cluster Library identifier defined by the ZigBee Alliance. The getter returns an item which has properties of `'key'` and `'value'`, or returns `undefined` if not found. In the returned item, `item.key` is the idetifier in string and `item.value` is the identifier in number.  
+**zcl-id** provides you with [APIs](#APIs) to get the key-value pairs of ZCL identifiers, i.e. profile, cluster, foundation and functional command, attribute and attribute data type. Each method returns an item with properties of `'key'` and `'value'` to show you the identifier in string and in number, respectively.  
 
-Let me show you some examples.  
+Here are some quick examples:  
 
 ```js
 var zclId = require('zcl-id')
 
-// get Profile Id
-var profKey =  zclId.profile(260).key;                               // 'HA'
-var profId =  zclId.profile('HA').value;                             // 260
+// Profile Id
+zclId.profile(260).key;                 // 'HA'
+zclId.profile('HA').value;              // 260
+zclId.profile('no_such_profile');       // undefined
 
-// get Cluster Id
-var cKey =  zclId.cluster(0).key;                                    // 'genBasic'
-var cId =  zclId.cluster('genBasic').value;                          // 0
+// Cluster Id
+zclId.cluster(0).key;                   // 'genBasic'
+zclId.cluster('genBasic').value;        // 0
+zclId.cluster('no_such_cluster');       // undefined
 
-// get Device Id
-var devKey =  zclId.device(260, 10).key;                             // 'doorLock'
-var devId =  zclId.device('HA', 'doorLock').value;                   // 10
+// Device Id
+zclId.device(260, 10).key;              // 'doorLock'
+zclId.device('HA', 'doorLock').value;   // 10
+zclId.device('HA', 'no_such_device');   // undefined
 
-// get Foundation Cmd Id
-var foundCmdKey =  zclId.foundation(2).key;                          // 'write'
-var foundCmdId =  zclId.foundation('write').value;                   // 2
+// Foundation Cmd Id
+zclId.foundation(2).key;                // 'write'
+zclId.foundation('write').value;        // 2
+zclId.foundation('invalid_command');    // undefined
 
-// get Functional Cmd Id
-var funcCmdKey =  zclId.functional(3, 0).key;                        // 'identify'
-var funcCmdId =  zclId.functional('genIdentify', 'identify').value;  // 0
+// Functional Cmd Id
+zclId.functional(3, 0).key;                         // 'identify'
+zclId.functional('genIdentify', 'identify').value;  // 0
+zclId.functional('genIdentify', 'invalid_command'); // 0
 
-// get Functional CmdRsp Id
-var funcRspKey =  zclId.getCmdRsp(9, 0).key;                         // 'alarm'
-var funcRspId =  zclId.getCmdRsp('genAlarms', 'alarm').value;        // 0
+// Functional CmdRsp Id
+zclId.getCmdRsp(9, 0).key;                          // 'alarm'
+zclId.getCmdRsp('genAlarms', 'alarm').value;        // 0
+zclId.getCmdRsp('genAlarms', 'invalid_command');    // undefined
 
-// get Attribute Id
-var attrKey =  zclId.attr(0, 3).key;                                 // 'hwVersion'
-var attrId =  zclId.attr('genBasic', 'hwVersion').value;             // 3
+// Attribute Id
+zclId.attr(0, 3).key;                               // 'hwVersion'
+zclId.attr('genBasic', 'hwVersion').value;          // 3
+zclId.attr('genBasic', 'no_such_attr');             // undefined
 
-// get Attribute DataType Id
-var attrTypeKey =  zclId.attrType(0, 1).key;                         // 'uint8'
-var attrTypeId =  zclId.attrType('genBasic', 'appVersion').value;    // 32
+// Attribute DataType Id
+zclId.attrType(0, 1).key;                           // 'uint8'
+zclId.attrType('genBasic', 'appVersion').value;     // 32
+zclId.attrType('genBasic', 'no_such_attr');         // undefined
 
-// get DataType Id
-var dataTypeKey =  zclId.dataType(33).key;                           // 'uint16'
-var dataTypeId =  zclId.dataType('uint16').value;                    // 33
+// DataType Id
+zclId.dataType(33).key;                             // 'uint16'
+zclId.dataType('uint16').value;                     // 33
+zclId.dataType('no_such_datatype');                 // undefined
 ```
 
 <br />
@@ -101,22 +111,23 @@ var dataTypeId =  zclId.dataType('uint16').value;                    // 33
 <a name="API_profile"></a>
 ### .profile(profId)
 
-Returns an item of the Profile identifier.  
+Returns the profile identifier.  
 
 **Arguments:**  
 
-1. `profId` (_String_ | _Number_): Profile Id. `profId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `profId` (_String_ | _Number_): Profile id, which can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
 ```js
-zclId.profile('HA');     // { key: 'HA', value: 260 }
-zclId.profile('260');    // { key: 'HA', value: 260 }
-zclId.profile(260);      // { key: 'HA', value: 260 }
+zclId.profile('HA');                // { key: 'HA', value: 260 }
+zclId.profile('260');               // { key: 'HA', value: 260 }
+zclId.profile(260);                 // { key: 'HA', value: 260 }
+zclId.profile('no_such_profile');   // undefined
 ```
 
 *************************************************
@@ -125,22 +136,23 @@ zclId.profile(260);      // { key: 'HA', value: 260 }
 <a name="API_cluster"></a>
 ### .cluster(cId)
 
-Returns an item of the Cluster identifier.  
+Returns the cluster identifier.  
 
 **Arguments:**  
 
-1. `cId` (_String_ | _Number_): Cluster Id. `cId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `cId` (_String_ | _Number_): Cluster id, which can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
 ```js
-zclId.cluster('genAlarms');    // { key: 'genAlarms', value: 9 }
-zclId.cluster('9');            // { key: 'genAlarms', value: 9 }
-zclId.cluster(9);              // { key: 'genAlarms', value: 9 }
+zclId.cluster('genAlarms');         // { key: 'genAlarms', value: 9 }
+zclId.cluster('9');                 // { key: 'genAlarms', value: 9 }
+zclId.cluster(9);                   // { key: 'genAlarms', value: 9 }
+zclId.cluster('no_such_cluster');   // undefined
 ```
 
 *************************************************
@@ -149,16 +161,16 @@ zclId.cluster(9);              // { key: 'genAlarms', value: 9 }
 <a name="API_device"></a>
 ### .device(profId, devId)
 
-Returns an item of the Device identifier.  
+Returns the device identifier under the specified profile.  
 
 **Arguments:**  
 
-1. `profId` (_String_ | _Number_): Profile Id. `profId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
-2. `devId` (_String_ | _Number_): Device Id. `devId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `profId` (_String_ | _Number_): Profile id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
+2. `devId` (_String_ | _Number_): Device id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -166,6 +178,8 @@ Returns an item of the Device identifier.
 zclId.device('HA', 'simpleSensor');    // { key: 'simpleSensor', value: 12 }
 zclId.device('260', '12');             // { key: 'simpleSensor', value: 12 }
 zclId.device(260, 12);                 // { key: 'simpleSensor', value: 12 }
+zclId.device('no_such_profile', 12);   // undefined
+zclId.device('HA', 'no_such_device');  // undefined
 ```
 
 *************************************************
@@ -174,22 +188,23 @@ zclId.device(260, 12);                 // { key: 'simpleSensor', value: 12 }
 <a name="API_foundation"></a>
 ### .foundation(cmdId)
 
-Returns an item of the Foundation Cmd identifier.  
+Returns the foundation command identifier.  
 
 **Arguments:**  
 
-1. `cmdId` (_String_ | _Number_): `cmdId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `cmdId` (_String_ | _Number_): Command id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
 ```js
-zclId.foundation('write');    // { key: 'write', value: 2 }
-zclId.foundation('2');        // { key: 'write', value: 2 }
-zclId.foundation(2);          // { key: 'write', value: 2 }
+zclId.foundation('write');          // { key: 'write', value: 2 }
+zclId.foundation('2');              // { key: 'write', value: 2 }
+zclId.foundation(2);                // { key: 'write', value: 2 }
+zclId.foundation('invalid_cmd');    // undefined
 ```
 
 *************************************************
@@ -198,23 +213,25 @@ zclId.foundation(2);          // { key: 'write', value: 2 }
 <a name="API_functional"></a>
 ### .functional(cId, cmdId)
 
-Returns an item of the Functional Cmd identifier.  
+Returns the functional command identifier under the specified cluster.  
 
 **Arguments:**  
 
-1. `cId` (_String_ | _Number_): Cluster Id. `cId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
-2. `cmdId` (_String_ | _Number_): `cmdId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `cId` (_String_ | _Number_): Cluster id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
+2. `cmdId` (_String_ | _Number_): Command id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
 ```js
-zclId.functional('genBasic', 'resetFactDefault');    // { key: 'resetFactDefault', value: 0 }
-zclId.functional('0', '0');                          // { key: 'resetFactDefault', value: 0 }
-zclId.functional(0, 0);                              // { key: 'resetFactDefault', value: 0 }
+zclId.functional('genBasic', 'resetFactDefault');           // { key: 'resetFactDefault', value: 0 }
+zclId.functional('0', '0');                                 // { key: 'resetFactDefault', value: 0 }
+zclId.functional(0, 0);                                     // { key: 'resetFactDefault', value: 0 }
+zclId.functional('no_such_cluster', 'resetFactDefault');    // undefined
+zclId.functional('genBasic', 'invalid_cmd');                // undefined
 ```
 
 *************************************************
@@ -223,23 +240,25 @@ zclId.functional(0, 0);                              // { key: 'resetFactDefault
 <a name="API_getCmdRsp"></a>
 ### .getCmdRsp(cId, rspId)
 
-Returns an item of the Functional CmdRsp identifier.  
+Returns the identifier of functional command response under the specified cluster.  
 
 **Arguments:**  
 
-1. `cId` (_String_ | _Number_): Cluster Id. `cId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
-2. `rspId` (_String_ | _Number_): `rspId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `cId` (_String_ | _Number_): Cluster id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
+2. `rspId` (_String_ | _Number_): Response id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
 ```js
-zclId.getCmdRsp('genAlarms', 'alarm');    // { key: 'alarm', value: 0 }
-zclId.getCmdRsp('9', '0');                // { key: 'alarm', value: 0 }
-zclId.getCmdRsp(9, 0);                    // { key: 'alarm', value: 0 }
+zclId.getCmdRsp('genAlarms', 'alarm');          // { key: 'alarm', value: 0 }
+zclId.getCmdRsp('9', '0');                      // { key: 'alarm', value: 0 }
+zclId.getCmdRsp(9, 0);                          // { key: 'alarm', value: 0 }
+zclId.getCmdRsp('no_such_cluster', 'alarm');    // undefined
+zclId.getCmdRsp('genAlarms', 'invalid_cmd');    // undefined
 ```
 
 *************************************************
@@ -248,23 +267,25 @@ zclId.getCmdRsp(9, 0);                    // { key: 'alarm', value: 0 }
 <a name="API_attr"></a>
 ### .attr(cId, attrId)
 
-Returns an item of the Attribute identifier.  
+Returns the attribute identifier under the specified cluster.  
 
 **Arguments:**  
 
-1. `cId` (_String_ | _Number_): Cluster Id. `cId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
-2. `attrId` (_String_ | _Number_): Attribute Id. `attrId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `cId` (_String_ | _Number_): Cluster id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
+2. `attrId` (_String_ | _Number_): Attribute id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
 ```js
-zclId.attr('genBasic', 'hwVersion');    // { key: 'hwVersion', value: 3 }
-zclId.attr('0', '3');                   // { key: 'hwVersion', value: 3 }
-zclId.attr(0, 3);                       // { key: 'hwVersion', value: 3 }
+zclId.attr('genBasic', 'hwVersion');        // { key: 'hwVersion', value: 3 }
+zclId.attr('0', '3');                       // { key: 'hwVersion', value: 3 }
+zclId.attr(0, 3);                           // { key: 'hwVersion', value: 3 }
+zclId.attr('no_such_cluster', 'hwVersion'); // undefined
+zclId.attr('genBasic', 'no_such_attr');     // undefined
 ```
 
 *************************************************
@@ -273,23 +294,25 @@ zclId.attr(0, 3);                       // { key: 'hwVersion', value: 3 }
 <a name="API_attrType"></a>
 ### .attrType(cId, attrId)
 
-Returns an item of the Attribute DataType identifier.  
+Returns the attribute data type identifier under the specified cluster.  
 
 **Arguments:**  
 
-1. `cId` (_String_ | _Number_): Cluster Id. `cId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
-2. `attrId` (_String_ | _Number_): Attribute Id. `attrId` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `cId` (_String_ | _Number_): Cluster id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
+2. `attrId` (_String_ | _Number_): Attribute id, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
 ```js
-zclId.attrType('genBasic', 'appVersion');    // { key: 'uint8', value: 32 }
-zclId.attrType('0', '1');                    // { key: 'uint8', value: 32 }
-zclId.attrType(0, 1);                        // { key: 'uint8', value: 32 }
+zclId.attrType('genBasic', 'appVersion');           // { key: 'uint8', value: 32 }
+zclId.attrType('0', '1');                           // { key: 'uint8', value: 32 }
+zclId.attrType(0, 1);                               // { key: 'uint8', value: 32 }
+zclId.attrType('no_such_cluster', 'appVersion');    // undefined
+zclId.attrType('genBasic', 'no_such_attr');         // undefined
 ```
 
 *************************************************
@@ -298,22 +321,23 @@ zclId.attrType(0, 1);                        // { key: 'uint8', value: 32 }
 <a name="API_dataType"></a>
 ### .dataType(type)
 
-Returns an item of the DataType identifier.  
+Returns the data type identifier.  
 
 **Arguments:**  
 
-1. `type` (_String_ | _Number_): DataType. `type` can be given with a string or a number. Notice that a numbered string will be recognized as a number, e.g. '128' is equal to 128.  
+1. `type` (_String_ | _Number_): Data type, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns undefined if not found.  
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
 ```js
-zclId.dataType('uint16');    // { key: 'uint16', value: 33 }
-zclId.dataType('33');        // { key: 'uint16', value: 33 }
-zclId.dataType(33);          // { key: 'uint16', value: 33 }
+zclId.dataType('uint16');               // { key: 'uint16', value: 33 }
+zclId.dataType('33');                   // { key: 'uint16', value: 33 }
+zclId.dataType(33);                     // { key: 'uint16', value: 33 }
+zclId.dataType('invalid_data_type');    // undefined
 ```
 
 *************************************************
