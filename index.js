@@ -24,6 +24,7 @@ zclId.profileId = new Enum(_common.profileId);
 zclId.clusterId = new Enum(_common.clusterId);
 zclId.foundationId = new Enum(_common.foundation);
 zclId.dataTypeId = new Enum(_common.dataType);
+zclId.statusId = new Enum(_common.status);
 zclId.deviceId.HA = new Enum(_common.haDevId);
 
 function isValidArgType(param) {
@@ -284,6 +285,23 @@ zclId.dataType = function (type) {
 
     if (typeItem)
         return { key: typeItem.key, value: typeItem.value };    // { key: 'DATA8', value: 8 }
+};
+
+zclId.status = function (status) {
+    // status: String | Number
+    if (!isValidArgType(status))
+        throw new TypeError('status should be a number or a string.');
+
+    var statusNumber = parseInt(status),
+        statusItem;
+
+    if (!isNaN(statusNumber))
+        status = statusNumber;
+
+    statusItem = zclId.statusId.get(status);
+
+    if (statusItem)
+        return { key: statusItem.key, value: statusItem.value };    // { key: 'DATA8', value: 8 }
 };
 
 module.exports = zclId;

@@ -88,6 +88,11 @@ zclId.attrType('genBasic', 'no_such_attr');         // undefined
 zclId.dataType(33).key;                             // 'uint16'
 zclId.dataType('uint16').value;                     // 33
 zclId.dataType('no_such_datatype');                 // undefined
+
+// Status Id
+zclId.dataType(133).key;                            // 'invalidField'
+zclId.dataType('invalidField').value;               // 133
+zclId.dataType('no_such_status');                   // undefined
 ```
 
 <br />
@@ -104,6 +109,7 @@ zclId.dataType('no_such_datatype');                 // undefined
 * [.attr()](#API_attr)  
 * [.attrType()](#API_attrType)  
 * [.dataType()](#API_dataType)  
+* [.status()](#API_status)  
 
 *************************************************
 <br />
@@ -343,6 +349,31 @@ zclId.dataType('invalid_data_type');    // undefined
 *************************************************
 <br />
 
+<a name="API_status"></a>
+### .status(status)
+
+Returns the status identifier.  
+
+**Arguments:**  
+
+1. `status` (_String_ | _Number_): Status, which can be given with a string or a number. A numbered string like '128' will be recognized as a number 128.  
+
+**Returns:**  
+
+* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+
+**Examples:**  
+
+```js
+zclId.status('invalidField');           // { key: 'invalidField', value: 133 }
+zclId.status('133');                    // { key: 'invalidField', value: 133 }
+zclId.status(133);                      // { key: 'invalidField', value: 133 }
+zclId.status('invalid_status');         // undefined
+```
+
+*************************************************
+<br />
+
 <a name="Table"></a>
 ## 5. Table of Identifiers  
 
@@ -513,6 +544,42 @@ zclId.dataType('invalid_data_type');    // undefined
     "ieeeAddr": 240,
     "secKey": 241,
     "unknown": 255
+}
+```
+
+* Status  
+
+```js
+{
+    "success": 0,
+    "failure": 1,
+    "notAuthorized": 126,
+    "malformedCmd": 128,
+    "unsupClusterCmd": 129,
+    "unsupGeneralCmd": 130,
+    "unsupManuClusterCmd": 131,
+    "unsupManuGeneralCmd": 132,
+    "invalidField": 133,
+    "unsupAttribute": 134,
+    "invalidValue": 135,
+    "readOnly": 136,
+    "insufficientSpace": 137,
+    "duplicateExists": 138,
+    "notFound": 139,
+    "unreportableAttribute": 140,
+    "invalidDataType": 141,
+    "invalidSelector": 142,
+    "writeOnly": 143,
+    "inconsistentStartupState": 144,
+    "definedOutOfBand": 145,
+    "inconsistent": 146,
+    "actionDenied": 147,
+    "timeout": 148,
+    "abort": 149,
+    "invalidImage": 150,
+    "waitForData": 151,
+    "noImageAvailable": 152,
+    "requireMoreImage": 153
 }
 ```
 

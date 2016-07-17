@@ -12,6 +12,8 @@ var profIdKeys = [],
     foundVals = [],
     dataTypeKeys = [],
     dataTypeVals = [],
+    statusKeys = [],
+    statusVals = [],
     devIdKeys = {
         HA: []
     },
@@ -38,6 +40,11 @@ for (k in zclId._common.foundation) {
 for (k in zclId._common.dataType) {
     dataTypeKeys.push(k);
     dataTypeVals.push(zclId._common.dataType[k]);
+}
+
+for (k in zclId._common.status) {
+    statusKeys.push(k);
+    statusVals.push(zclId._common.status[k]);
 }
 
 for (k in zclId._common.haDevId) {
@@ -661,6 +668,35 @@ describe('Module Methods Check', function() {
         it('should get undefined if type not found', function () {
             expect(zclId.dataType('xxx')).to.be.undefined;
             expect(zclId.dataType(12345)).to.be.undefined;
+        });
+    });
+
+    describe('#.status', function () {
+        it('should get right item by type string', function () {
+            statusKeys.forEach(function (dkey) {
+                var hitA = zclId.status(dkey),
+                    hitB = zclId.statusId.get(dkey);
+
+                expect(hitA).not.to.be.undefined;
+                expect(hitA.key).to.be.eql(hitB.key);
+                expect(hitA.value).to.be.eql(hitB.value);
+            });
+        });
+
+        it('should get right item by type number', function () {
+            statusVals.forEach(function (dval) {
+                var hitA = zclId.status(dval),
+                    hitB = zclId.statusId.get(dval);
+
+                expect(hitA).not.to.be.undefined;
+                expect(hitA.key).to.be.eql(hitB.key);
+                expect(hitA.value).to.be.eql(hitB.value);
+            });
+        });
+
+        it('should get undefined if type not found', function () {
+            expect(zclId.status('xxx')).to.be.undefined;
+            expect(zclId.status(12345)).to.be.undefined;
         });
     });
 });
