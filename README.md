@@ -481,6 +481,7 @@ zclId.status('invalid_status');         // undefined
     "haApplianceStatistics": 2819,
     "haElectricalMeasurement": 2820,
     "haDiagnostic": 2821,
+    "lightLink": 4096,
     "manuSpecificCluster": 65535
 }
 ```
