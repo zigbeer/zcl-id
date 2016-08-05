@@ -148,7 +148,8 @@ zclId.functional = function (cId, cmdId) {
     var cNumber = parseInt(cId),
         cmdNumber = parseInt(cmdId),
         cItem,
-        cmdItem;
+        cmdItem,
+        cInfo;
 
     if (!isNaN(cNumber))
         cId = cNumber;
@@ -161,7 +162,7 @@ zclId.functional = function (cId, cmdId) {
     if (cItem)
         cInfo = zclId._getCluster(cItem.key);
 
-    if (cInfo.cmd)
+    if (cInfo.hasOwnProperty('cmd'))
         cmdItem = cInfo.cmd.get(cmdId);
 
     if (cmdItem)
@@ -193,7 +194,7 @@ zclId.getCmdRsp = function (cId, rspId) {    // TODO
     if (cItem)
         cInfo = zclId._getCluster(cItem.key);
 
-    if (cInfo.cmdRsp)
+    if (cInfo.hasOwnProperty('cmdRsp'))
         cmdItem = cInfo.cmdRsp.get(rspId);
 
     if (cmdItem)
@@ -225,7 +226,7 @@ zclId.attr = function (cId, attrId) {
     if (cItem)
         cInfo = zclId._getCluster(cItem.key);
 
-    if (cInfo.attr)
+    if (cInfo.hasOwnProperty('attr'))
         attrItem = cInfo.attr.get(attrId);
 
     if (attrItem)
@@ -261,7 +262,7 @@ zclId.attrType = function (cId, attrId) {
 
     attrName = zclId.attr(cId, attrId);
 
-    if (cInfo.attrType && attrName) {
+    if (cInfo.hasOwnProperty('attrType') && attrName) {
         attrItem = cInfo.attrType.get(attrName.key);
         attrType = zclId.dataType(attrItem.value);
     }

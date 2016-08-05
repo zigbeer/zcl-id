@@ -299,6 +299,18 @@
             "concentratorDiscoveryTime":{"id":66,"type":"uint8"}},
         "cmd":{"restartDevice":0,"saveStartupParams":1,"restoreStartupParams":2,"resetStartupParams":3},
         "cmdRsp":{"restartDeviceRsp":0,"saveStartupParamsRsp":1,"restoreStartupParamsRsp":2,"resetStartupParamsRsp":3}},
+    "genPollCtrl": {
+        "attrId":{
+            "checkinInterval":{"id":0,"type":"uint32"},
+            "longPollInterval":{"id":1,"type":"uint32"},
+            "shortPollInterval":{"id":2,"type":"uint16"},
+            "fastPollTimeout":{"id":3,"type":"uint16"},
+            "checkinIntervalMin":{"id":4,"type":"uint32"},
+            "longPollIntervalMin":{"id":5,"type":"uint32"},
+            "fastPollTimeoutMax":{"id":6,"type":"uint16"},
+            "physicalClosedLimit":{"id":0,"type":"uint16"}},
+        "cmd":{"checkinRsp":0,"fastPollStop":1,"setLongPollInterval":2,"setShortPollInterval":3},
+        "cmdRsp":{"checkin":0}},
     "closuresShadeCfg": {
         "attrId":{
             "physicalClosedLimit":{"id":0,"type":"uint16"},
