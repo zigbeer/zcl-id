@@ -1,8 +1,6 @@
 # zcl-id
 An utility for getting ZCL identifiers defined by ZigBee Cluster Library.  
 
-<br />
-
 [![Travis branch](https://img.shields.io/travis/zigbeer/zcl-id/master.svg?maxAge=2592000)](https://travis-ci.org/zigbeer/zcl-id)
 [![npm](https://img.shields.io/npm/v/zcl-id.svg?maxAge=2592000)](https://www.npmjs.com/package/zcl-id)
 [![npm](https://img.shields.io/npm/l/zcl-id.svg?maxAge=2592000)](https://www.npmjs.com/package/zcl-id)
@@ -25,19 +23,15 @@ An utility for getting ZCL identifiers defined by ZigBee Cluster Library.
 
 **zcl-id** is a dictionary of identifiers defined by [_ZigBee Cluster Library Specification_](https://github.com/zigbeer/documents/blob/master/zcl-id/ZIGBEE_CLUSTER_LIBRARY_SPECIFICATION.pdf).  
 
-<br />
-
 <a name="Installation"></a>
 ## 2. Installation  
 
 > $ npm install zcl-id --save
 
-<br />
-
 <a name="Usage"></a>
 ## 3. Usage  
 
-**zcl-id** provides you with [APIs](#APIs) to get the key-value pairs of ZCL identifiers, i.e. profile, cluster, foundation and functional command, attribute and attribute data type. Each method returns an item with properties of `'key'` and `'value'` to show you the identifier in string and in number, respectively.  
+**zcl-id** provides you with APIs to get the key-value pairs of ZCL identifiers, i.e. profile, cluster, foundation and functional command, attribute and attribute data type. Each method returns an item with properties of `'key'` and `'value'` to show you the identifier in string and in number, respectively.  
 
 Here are some quick examples:  
 
@@ -94,7 +88,7 @@ zclId.dataType(133).key;                            // 'invalidField'
 zclId.dataType('invalidField').value;               // 133
 zclId.dataType('no_such_status');                   // undefined
 ```
-
+  
 <br />
 
 <a name="APIs"></a>
@@ -112,8 +106,6 @@ zclId.dataType('no_such_status');                   // undefined
 * [.status()](#API_status)  
 
 *************************************************
-<br />
-
 <a name="API_profile"></a>
 ### .profile(profId)
 
@@ -125,7 +117,7 @@ Returns the profile identifier.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -135,10 +127,8 @@ zclId.profile('260');               // { key: 'HA', value: 260 }
 zclId.profile(260);                 // { key: 'HA', value: 260 }
 zclId.profile('no_such_profile');   // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_cluster"></a>
 ### .cluster(cId)
 
@@ -150,7 +140,7 @@ Returns the cluster identifier.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -160,10 +150,8 @@ zclId.cluster('9');                 // { key: 'genAlarms', value: 9 }
 zclId.cluster(9);                   // { key: 'genAlarms', value: 9 }
 zclId.cluster('no_such_cluster');   // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_device"></a>
 ### .device(profId, devId)
 
@@ -176,7 +164,7 @@ Returns the device identifier under the specified profile.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -187,10 +175,8 @@ zclId.device(260, 12);                 // { key: 'simpleSensor', value: 12 }
 zclId.device('no_such_profile', 12);   // undefined
 zclId.device('HA', 'no_such_device');  // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_foundation"></a>
 ### .foundation(cmdId)
 
@@ -202,7 +188,7 @@ Returns the foundation command identifier.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -212,10 +198,8 @@ zclId.foundation('2');              // { key: 'write', value: 2 }
 zclId.foundation(2);                // { key: 'write', value: 2 }
 zclId.foundation('invalid_cmd');    // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_functional"></a>
 ### .functional(cId, cmdId)
 
@@ -228,7 +212,7 @@ Returns the functional command identifier under the specified cluster.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -239,10 +223,8 @@ zclId.functional(0, 0);                                     // { key: 'resetFact
 zclId.functional('no_such_cluster', 'resetFactDefault');    // undefined
 zclId.functional('genBasic', 'invalid_cmd');                // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_getCmdRsp"></a>
 ### .getCmdRsp(cId, rspId)
 
@@ -255,7 +237,7 @@ Returns the identifier of functional command response under the specified cluste
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -266,10 +248,8 @@ zclId.getCmdRsp(9, 0);                          // { key: 'alarm', value: 0 }
 zclId.getCmdRsp('no_such_cluster', 'alarm');    // undefined
 zclId.getCmdRsp('genAlarms', 'invalid_cmd');    // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_attr"></a>
 ### .attr(cId, attrId)
 
@@ -282,7 +262,7 @@ Returns the attribute identifier under the specified cluster.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -293,10 +273,8 @@ zclId.attr(0, 3);                           // { key: 'hwVersion', value: 3 }
 zclId.attr('no_such_cluster', 'hwVersion'); // undefined
 zclId.attr('genBasic', 'no_such_attr');     // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_attrType"></a>
 ### .attrType(cId, attrId)
 
@@ -309,7 +287,7 @@ Returns the attribute data type identifier under the specified cluster.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -320,10 +298,8 @@ zclId.attrType(0, 1);                               // { key: 'uint8', value: 32
 zclId.attrType('no_such_cluster', 'appVersion');    // undefined
 zclId.attrType('genBasic', 'no_such_attr');         // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_dataType"></a>
 ### .dataType(type)
 
@@ -335,7 +311,7 @@ Returns the data type identifier.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -345,10 +321,8 @@ zclId.dataType('33');                   // { key: 'uint16', value: 33 }
 zclId.dataType(33);                     // { key: 'uint16', value: 33 }
 zclId.dataType('invalid_data_type');    // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="API_status"></a>
 ### .status(status)
 
@@ -360,7 +334,7 @@ Returns the status identifier.
 
 **Returns:**  
 
-* (_Object_ | _Undefined_): Returns an item of { key: 'sampleId', value: 1234 }, otherwise returns `undefined` if not found.  
+* (_Object_ | _Undefined_): Returns an item of `{ key: 'sampleId', value: 1234 }`, otherwise returns `undefined` if not found.  
 
 **Examples:**  
 
@@ -370,10 +344,8 @@ zclId.status('133');                    // { key: 'invalidField', value: 133 }
 zclId.status(133);                      // { key: 'invalidField', value: 133 }
 zclId.status('invalid_status');         // undefined
 ```
-
+  
 *************************************************
-<br />
-
 <a name="Table"></a>
 ## 5. Table of Identifiers  
 
