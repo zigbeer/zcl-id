@@ -1,6 +1,6 @@
 {
   "name": "zcl-id",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "An utility for getting ZCL identifiers defined by ZigBee Cluster Library.",
   "main": "index.js",
   "scripts": {

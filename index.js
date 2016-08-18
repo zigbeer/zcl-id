@@ -1,9 +1,8 @@
-var fs = require('fs'),
-    _ = require('busyman'),
+var _ = require('busyman'),
     Enum = require('enum');
 
-var _common = JSON.parse(fs.readFileSync(__dirname + '/definitions/common.json')),
-    _clusterDefs = JSON.parse(fs.readFileSync(__dirname + '/definitions/cluster_defs.json')),
+var _common = require('./definitions/common.json'),
+    _clusterDefs = require('./definitions/cluster_defs.json'),
     clusterWithNewFormat = require('./definitions/clusterWithNewFormat');
 
 var zclId = {
