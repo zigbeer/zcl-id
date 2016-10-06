@@ -299,6 +299,21 @@
             "concentratorDiscoveryTime":{"id":66,"type":"uint8"}},
         "cmd":{"restartDevice":0,"saveStartupParams":1,"restoreStartupParams":2,"resetStartupParams":3},
         "cmdRsp":{"restartDeviceRsp":0,"saveStartupParamsRsp":1,"restoreStartupParamsRsp":2,"resetStartupParamsRsp":3}},
+    "genOta": {
+        "attrId":{
+            "upgradeServerId":{"id":0,"type":"ieeeAddr"},
+            "fileOffset":{"id":1,"type":"uint32"},
+            "currentFileVersion":{"id":2,"type":"uint32"},
+            "currentZigbeeStackVersion":{"id":3,"type":"uint16"},
+            "downloadedFileVersion":{"id":4,"type":"uint32"},
+            "downloadedZigbeeStackVersion":{"id":5,"type":"uint16"},
+            "imageUpgradeStatus":{"id":6,"type":"enum8"},
+            "manufacturerId":{"id":7,"type":"uint16"},
+            "imageTypeId":{"id":8,"type":"uint16"},
+            "minimumBlockReqDelay":{"id":9,"type":"uint16"},
+            "imageStamp":{"id":10,"type":"uint32"}},
+        "cmd":{"queryNextImageReq":1,"imageBlockReq":3,"imagePageReq":4,"upgradeEndReq":6,"querySpecificFileReq":8},
+        "cmdRsp":{"imageNotify":0,"queryNextImageRsp":2,"imageBlockRsp":5,"upgradeEndRsp":7,"querySpecificFileRsp":9}},
     "genPollCtrl": {
         "attrId":{
             "checkinInterval":{"id":0,"type":"uint32"},
