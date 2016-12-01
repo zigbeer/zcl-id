@@ -362,6 +362,56 @@ zclId.status('invalid_status');         // undefined
 }
 ```  
 
+* HA Device ID  
+
+```js
+{
+    "onOffSwitch": 0,
+    "levelControlSwitch": 1,
+    "onOffOutput": 2,
+    "levelControllableOutput": 3,
+    "sceneSelector": 4,
+    "configurationTool": 5,
+    "remoteControl": 6,
+    "combinedInterface": 7,
+    "rangeExtender": 8,
+    "mainsPowerOutlet": 9,
+    "doorLock": 10,
+    "doorLockController": 11,
+    "simpleSensor": 12,
+    "consumptionAwarenessDevice": 13,
+    "homeGateway": 80,
+    "smartPlug": 81,
+    "whiteGoods": 82,
+    "meterInterface": 83,
+    "testDevice": 255,
+    "onOffLight": 256,
+    "dimmableLight": 257,
+    "coloredDimmableLight": 258,
+    "onOffLightSwitch": 259,
+    "dimmerSwitch": 260,
+    "colorDimmerSwitch": 261,
+    "lightSensor": 262,
+    "occupancySensor": 263,
+    "shade": 512,
+    "shadeController": 513,
+    "windowCoveringDevice": 514,
+    "windowCoveringController": 515,
+    "heatingCoolingUnit": 768,
+    "thermostat": 769,
+    "temperatureSensor": 770,
+    "pump": 771,
+    "pumpController": 772,
+    "pressureSensor": 773,
+    "flowSensor": 774,
+    "miniSplitAc": 775,
+    "iasControlIndicatingEquipment": 1024,
+    "iasAncillaryControlEquipment": 1025,
+    "iasZone": 1026,
+    "iasWarningDevice": 1027
+}
+```
+
 * Cluster  
 
 ```js
