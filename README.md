@@ -353,12 +353,13 @@ zclId.status('invalid_status');         // undefined
 
 ```js
 {
-    "IPM": 257,
-    "HA": 260,
-    "CBA": 261,
-    "TA": 263,
-    "PHHC": 264,
-    "SE": 265
+    "HA": 260,   // ZigBee Home Automation
+    "BA": 261,   // ZigBee Building Automation
+    "TS": 263,   // ZigBee Telecom Services
+    "HC": 264,   // ZigBee Health Care
+    "SE": 265,   // ZigBee Smart Energy
+    "RS": 266,   // ZigBee Retail Services
+    "LL": 49246  // ZigBee Light Link
 }
 ```  
 

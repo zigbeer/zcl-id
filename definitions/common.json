@@ -9,12 +9,13 @@
         "CLIENT": 128
     },
     "profileId": {
-        "IPM": 257,
         "HA": 260,
-        "CBA": 261,
-        "TA": 263,
-        "PHHC": 264,
-        "SE": 265
+        "BA": 261,
+        "TS": 263,
+        "HC": 264,
+        "SE": 265,
+        "RS": 266,
+        "LL": 49246
     },
     "direction": {
         "clientToServer": 0,
