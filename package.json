@@ -1,6 +1,6 @@
 {
   "name": "zcl-id",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "An utility for getting ZCL identifiers defined by ZigBee Cluster Library.",
   "main": "index.js",
   "scripts": {
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/zigbeer/zcl-id#readme",
   "dependencies": {
-    "busyman": "^0.2.1",
+    "busyman": "^0.3.0",
     "enum": "^2.3.0"
   },
   "devDependencies": {
