@@ -728,5 +728,10 @@ describe('Module Methods Check', function() {
                 { attrId: 20, dataType: 34 }
             ]);
         });
+
+
+        it('should be undefined if cluster not found', function () {
+            expect(zclId.attrList('genDeviceTempCfgxx')).to.be.undefined;
+        });
     });
 });
