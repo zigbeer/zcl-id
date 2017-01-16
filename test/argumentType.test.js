@@ -453,6 +453,30 @@ describe('APIs Arguments Check for Throwing Error', function() {
         });
     });
 
+    describe('#.attrList', function() {
+        it('should be a function', function () {
+            expect(zclId.attrList).to.be.a('function');
+        });
+
+        it('should throw TypeError if input cId is not a number and not a string', function () {
+            expect(function () { return zclId.attrList(); }).to.throw(TypeError);
+            expect(function () { return zclId.attrList(undefined); }).to.throw(TypeError);
+            expect(function () { return zclId.attrList(null); }).to.throw(TypeError);
+            expect(function () { return zclId.attrList(NaN); }).to.throw(TypeError);
+            expect(function () { return zclId.attrList([]); }).to.throw(TypeError);
+            expect(function () { return zclId.attrList({}); }).to.throw(TypeError);
+            expect(function () { return zclId.attrList(true); }).to.throw(TypeError);
+            expect(function () { return zclId.attrList(new Date()); }).to.throw(TypeError);
+            expect(function () { return zclId.attrList(function () {}); }).to.throw(TypeError);
+
+            expect(function () { return zclId.attrList(3); }).not.to.throw(Error);
+            expect(function () { return zclId.attrList('3'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrList(0x0003); }).not.to.throw(Error);
+            expect(function () { return zclId.attrList('0x0003'); }).not.to.throw(Error);
+            expect(function () { return zclId.attrList('genIdentify'); }).not.to.throw(Error);
+        });
+    });
+
     describe('#.attr', function() {
         it('should be a function', function () {
             expect(zclId.attr).to.be.a('function');

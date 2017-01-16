@@ -5,26 +5,20 @@ var _common = require('./definitions/common.json'),
     _clusterDefs = require('./definitions/cluster_defs.json'),
     clusterWithNewFormat = require('./definitions/clusterWithNewFormat');
 
-var zclId = {
-    _common: _common,
-    profileId: null,
-    clusterId: null,
-    foundation: null,
-    dataType: null,
-    deviceId: {
-        HA: null
-    }
-};
+var propUnwritable = { writable: false, enumerable: false, configurable: true };
+
+var zclId = {};
 
 /*************************************************************************************************/
 /*** Loading Enumerations                                                                      ***/
 /*************************************************************************************************/
-zclId.profileId = new Enum(_common.profileId);
-zclId.clusterId = new Enum(_common.clusterId);
-zclId.foundationId = new Enum(_common.foundation);
-zclId.dataTypeId = new Enum(_common.dataType);
-zclId.statusId = new Enum(_common.status);
-zclId.deviceId.HA = new Enum(_common.haDevId);
+Object.defineProperty(zclId, '_common', _.assign({ value: _common }, propUnwritable));
+Object.defineProperty(zclId, 'profileId', _.assign({ value: new Enum(_common.profileId) }, propUnwritable));
+Object.defineProperty(zclId, 'foundationId', _.assign({ value: new Enum(_common.foundation) }, propUnwritable));
+Object.defineProperty(zclId, 'dataTypeId', _.assign({ value: new Enum(_common.dataType) }, propUnwritable));
+Object.defineProperty(zclId, 'statusId', _.assign({ value: new Enum(_common.status) }, propUnwritable));
+Object.defineProperty(zclId, 'clusterId', _.assign({ value: new Enum(_common.clusterId) }, propUnwritable));
+Object.defineProperty(zclId, 'deviceId', _.assign({ value: { HA: new Enum(_common.haDevId) } }, propUnwritable));
 
 function isValidArgType(param) {
     var isValid = true;
@@ -41,21 +35,24 @@ function isValidArgType(param) {
 /*************************************************************************************************/
 /*** zclId Methods                                                                             ***/
 /*************************************************************************************************/
-zclId._getCluster = function (cluster) {
-    if (zclId[cluster]) {
-        return zclId[cluster];
-    } else if (_clusterDefs[cluster]) {
-        zclId[cluster] = clusterWithNewFormat(_clusterDefs[cluster]);
-        _clusterDefs[cluster] = null;
-        return zclId[cluster];
+Object.defineProperty(zclId, '_getCluster', _.assign({
+    value: function (cluster) {
+        if (zclId[cluster]) {
+            return zclId[cluster];
+        } else if (_clusterDefs[cluster]) {
+            zclId[cluster] = clusterWithNewFormat(_clusterDefs[cluster]);
+            _clusterDefs[cluster] = null;
+            return zclId[cluster];
+        }
+        // return: {
+        //     attr,
+        //     attrType,
+        //     cmd,
+        //     cmdRsp
+        // }
     }
-    // return: {
-    //     attr,
-    //     attrType,
-    //     cmd,
-    //     cmdRsp
-    // }
-};
+}, propUnwritable));
+
 
 zclId.profile = function (profId) {
     // profId: String | Number
@@ -198,6 +195,29 @@ zclId.getCmdRsp = function (cId, rspId) {    // TODO
 
     if (cmdItem)
         return { key: cmdItem.key, value: cmdItem.value };      // { key: 'viewRsp', value: 1 }
+};
+
+zclId.attrList = function (cId) {
+    // cId: String | Number
+    if (!isValidArgType(cId))
+        throw new TypeError('cId should be a number or a string.');
+
+    var cItem = zclId.cluster(cId),
+        clst = cItem ? zclId._getCluster(cItem.key) : undefined;
+
+    if (!cItem || !clst)
+        return;
+
+    var attrs = _.map(clst.attr.enums, function (item) {
+        return { attrId: item.value };
+    });
+
+    _.forEach(attrs, function (item) {
+        var type = zclId.attrType(cItem.key, item.attrId);
+        item.dataType = type ? type.value : 255;
+    });
+
+    return attrs;
 };
 
 zclId.attr = function (cId, attrId) {

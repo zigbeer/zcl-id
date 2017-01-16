@@ -429,7 +429,7 @@
             "lifetimeEnergyConsumed":{"id":23,"type":"uint32"},
             "operationMode":{"id":32,"type":"enum8"},
             "controlMode":{"id":33,"type":"enum8"},
-            "alarmMask":{"id":33,"type":"bitmap16"}},
+            "alarmMask":{"id":34,"type":"bitmap16"}},
         "cmd":null,
         "cmdRsp":null},
     "hvacThermostat": {

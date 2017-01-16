@@ -699,4 +699,34 @@ describe('Module Methods Check', function() {
             expect(zclId.status(12345)).to.be.undefined;
         });
     });
+
+    describe('#.attrList', function () {
+        it('should get right list by cluster string id', function () {
+            expect(zclId.attrList('genDeviceTempCfg')).to.be.deep.equal([
+                { attrId: 0, dataType: 41 },
+                { attrId: 1, dataType: 41 },
+                { attrId: 2, dataType: 41 },
+                { attrId: 3, dataType: 33 },
+                { attrId: 16, dataType: 24 },
+                { attrId: 17, dataType: 41 },
+                { attrId: 18, dataType: 41 },
+                { attrId: 19, dataType: 34 },
+                { attrId: 20, dataType: 34 }
+            ]);
+        });
+
+        it('should get right list by cluster numeric id', function () {
+            expect(zclId.attrList(2)).to.be.deep.equal([
+                { attrId: 0, dataType: 41 },
+                { attrId: 1, dataType: 41 },
+                { attrId: 2, dataType: 41 },
+                { attrId: 3, dataType: 33 },
+                { attrId: 16, dataType: 24 },
+                { attrId: 17, dataType: 41 },
+                { attrId: 18, dataType: 41 },
+                { attrId: 19, dataType: 34 },
+                { attrId: 20, dataType: 34 }
+            ]);
+        });
+    });
 });
