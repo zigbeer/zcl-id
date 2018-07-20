@@ -1,7 +1,7 @@
 # zigbee-bridge-definitions
 An utility for getting ZCL identifiers defined by ZigBee Cluster Library.  
 
-[![Travis branch](https://img.shields.io/travis/open-zigbee/zigbee-bridge-definitions/master.svg?maxAge=2592000)](https://travis-ci.org/open-zigbee/zigbee-bridge-definitions)
+[![Travis branch](https://travis-ci.com/open-zigbee/zigbee-bridge-definitions.svg?branch=master)](https://travis-ci.com/open-zigbee/zigbee-bridge-definitions)
 [![npm](https://img.shields.io/npm/v/zigbee-bridge-definitions.svg?maxAge=2592000)](https://www.npmjs.com/package/zigbee-bridge-definitions)
 [![npm](https://img.shields.io/npm/l/zigbee-bridge-definitions.svg?maxAge=2592000)](https://www.npmjs.com/package/zigbee-bridge-definitions)
 
