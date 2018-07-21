@@ -38,7 +38,8 @@
     ],
 
     "scripts": {
-        "test": "mocha -u bdd --reporter spec"
+        "test": "mocha -u bdd --reporter spec",
+        "lint": "eslint definitions test"
     },
 
     "dependencies": {
@@ -48,6 +49,9 @@
 
     "devDependencies": {
         "chai": "^3.5.0",
-        "mocha": "^2.5.3"
+        "mocha": "^2.5.3",
+
+        "eslint": "5.2.0",
+            "eslint-config-google": "0.9.1"
     }
 }
