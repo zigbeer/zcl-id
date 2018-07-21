@@ -1,63 +1,36 @@
-var fs = require('fs'),
-    expect = require('chai').expect,
-    zclId = require('../index');
+const expect = require('chai').expect;
+const zclId = require('../index');
 
-var clusterDefs = JSON.parse(fs.readFileSync(__dirname + '/../definitions/cluster_defs.json'));
+const clusterDefs = require('../definitions/cluster_defs.json');
 
-var profIdKeys = [],
-    profIdVals = [],
-    cIdKeys = [],
-    cIdVals = [],
-    foundKeys = [],
-    foundVals = [],
-    dataTypeKeys = [],
-    dataTypeVals = [],
-    statusKeys = [],
-    statusVals = [],
-    devIdKeys = {
-        HA: []
-    },
-    devIdVals = {
-        HA: []
-    },
-    k;
+const profIdKeys = Object.keys(zclId._common.profileId);
+const profIdVals = Object.values(zclId._common.profileId);
 
-for (k in zclId._common.profileId) {
-    profIdKeys.push(k);
-    profIdVals.push(zclId._common.profileId[k]);
-}
+const cIdKeys = Object.keys(zclId._common.clusterId);
+const cIdVals = Object.values(zclId._common.clusterId);
 
-for (k in zclId._common.clusterId) {
-    cIdKeys.push(k);
-    cIdVals.push(zclId._common.clusterId[k]);
-}
+const foundKeys = Object.keys(zclId._common.foundation);
+const foundVals = Object.values(zclId._common.foundation);
 
-for (k in zclId._common.foundation) {
-    foundKeys.push(k);
-    foundVals.push(zclId._common.foundation[k]);
-}
+const dataTypeKeys = Object.keys(zclId._common.dataType);
+const dataTypeVals = Object.values(zclId._common.dataType);
 
-for (k in zclId._common.dataType) {
-    dataTypeKeys.push(k);
-    dataTypeVals.push(zclId._common.dataType[k]);
-}
+const statusKeys = Object.keys(zclId._common.status);
+const statusVals = Object.values(zclId._common.status);
 
-for (k in zclId._common.status) {
-    statusKeys.push(k);
-    statusVals.push(zclId._common.status[k]);
-}
+const devIdKeys = {
+    HA: Object.keys(zclId._common.haDevId),
+};
+const devIdVals = {
+    HA: Object.values(zclId._common.haDevId),
+};
 
-for (k in zclId._common.haDevId) {
-    devIdKeys.HA.push(k);
-    devIdVals.HA.push(zclId._common.haDevId[k]);
-}
-
-describe('Module Methods Check', function() {
-    describe('#.profile', function() {
-        it('should get right item by profId string', function () {
-            profIdKeys.forEach(function (pkey) {
-                var hitA = zclId.profile(pkey),
-                    hitB = zclId.profileId.get(pkey);
+describe('Module Methods Check', () => {
+    describe('#.profile', () => {
+        it('should get right item by profId string', () => {
+            profIdKeys.forEach((pkey) => {
+                const hitA = zclId.profile(pkey);
+                const hitB = zclId.profileId.get(pkey);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -65,10 +38,10 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by profId number', function () {
-            profIdVals.forEach(function (pval) {
-                var hitA = zclId.profile(pval),
-                    hitB = zclId.profileId.get(pval);
+        it('should get right item by profId number', () => {
+            profIdVals.forEach((pval) => {
+                const hitA = zclId.profile(pval);
+                const hitB = zclId.profileId.get(pval);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -76,20 +49,20 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if profId not found', function () {
+        it('should get undefined if profId not found', () => {
             expect(zclId.profile('xxx')).to.be.undefined;
             expect(zclId.profile(12345)).to.be.undefined;
         });
     });
 
-    describe('#.device', function() {
-        it('should get right item by profId string and devId string', function () {
-            profIdKeys.forEach(function (pkey) {
+    describe('#.device', () => {
+        it('should get right item by profId string and devId string', () => {
+            profIdKeys.forEach((pkey) => {
                 if (!devIdKeys[pkey]) return;
 
-                devIdKeys[pkey].forEach(function (dkey) {
-                    var hitA = zclId.device(pkey, dkey),
-                        hitB = zclId.deviceId[pkey].get(dkey);
+                devIdKeys[pkey].forEach((dkey) => {
+                    const hitA = zclId.device(pkey, dkey);
+                    const hitB = zclId.deviceId[pkey].get(dkey);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -98,13 +71,13 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by profId string and devId number', function () {
-            profIdKeys.forEach(function (pkey) {
+        it('should get right item by profId string and devId number', () => {
+            profIdKeys.forEach((pkey) => {
                 if (!devIdKeys[pkey]) return;
 
-                devIdVals[pkey].forEach(function (dval) {
-                    var hitA = zclId.device(pkey, dval),
-                        hitB = zclId.deviceId[pkey].get(dval);
+                devIdVals[pkey].forEach((dval) => {
+                    const hitA = zclId.device(pkey, dval);
+                    const hitB = zclId.deviceId[pkey].get(dval);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -113,15 +86,15 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by profId number and devId string', function () {
-            profIdVals.forEach(function (pval) {
-                var profId = zclId.profile(pval);
+        it('should get right item by profId number and devId string', () => {
+            profIdVals.forEach((pval) => {
+                const profId = zclId.profile(pval);
 
                 if (!devIdKeys[profId.key]) return;
 
-                devIdKeys[profId.key].forEach(function (dkey) {
-                    var hitA = zclId.device(pval, dkey),
-                        hitB = zclId.deviceId[profId.key].get(dkey);
+                devIdKeys[profId.key].forEach((dkey) => {
+                    const hitA = zclId.device(pval, dkey);
+                    const hitB = zclId.deviceId[profId.key].get(dkey);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -130,15 +103,15 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by profId number and devId number', function () {
-            profIdVals.forEach(function (pval) {
-                var profId = zclId.profile(pval);
+        it('should get right item by profId number and devId number', () => {
+            profIdVals.forEach((pval) => {
+                const profId = zclId.profile(pval);
 
                 if (!devIdKeys[profId.key]) return;
 
-                devIdVals[profId.key].forEach(function (dval) {
-                    var hitA = zclId.device(pval, dval),
-                        hitB = zclId.deviceId[profId.key].get(dval);
+                devIdVals[profId.key].forEach((dval) => {
+                    const hitA = zclId.device(pval, dval);
+                    const hitB = zclId.deviceId[profId.key].get(dval);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -147,14 +120,14 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if target not found', function () {
+        it('should get undefined if target not found', () => {
             expect(zclId.device('HA', 'dddd')).to.be.undefined;
             expect(zclId.device('HA', 12345)).to.be.undefined;
             expect(zclId.device(3, 'dddd')).to.be.undefined;
             expect(zclId.device(3, 12345)).to.be.undefined;
         });
 
-        it('should get an item if target is found', function () {
+        it('should get an item if target is found', () => {
             expect(zclId.device('HA', 'doorLock')).not.to.be.undefined;
             expect(zclId.device('HA', 4)).not.to.be.undefined;
             expect(zclId.device(260, 'doorLock')).not.to.be.undefined;
@@ -162,11 +135,11 @@ describe('Module Methods Check', function() {
         });
     });
 
-    describe('#.cluster', function() {
-        it('should get right item by cId string', function () {
-            cIdKeys.forEach(function (ckey) {
-                var hitA = zclId.cluster(ckey),
-                    hitB = zclId.clusterId.get(ckey);
+    describe('#.cluster', () => {
+        it('should get right item by cId string', () => {
+            cIdKeys.forEach((ckey) => {
+                const hitA = zclId.cluster(ckey);
+                const hitB = zclId.clusterId.get(ckey);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -174,10 +147,10 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number', function () {
-            cIdVals.forEach(function (cval) {
-                var hitA = zclId.cluster(cval),
-                    hitB = zclId.clusterId.get(cval);
+        it('should get right item by cId number', () => {
+            cIdVals.forEach((cval) => {
+                const hitA = zclId.cluster(cval);
+                const hitB = zclId.clusterId.get(cval);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -185,17 +158,17 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if cId not found', function () {
+        it('should get undefined if cId not found', () => {
             expect(zclId.cluster('xxx')).to.be.undefined;
             expect(zclId.cluster(12345)).to.be.undefined;
         });
     });
 
-    describe('#.foundation', function() {
-        it('should get right item by cmdId string', function () {
-            foundKeys.forEach(function (fkey) {
-                var hitA = zclId.foundation(fkey),
-                    hitB = zclId.foundationId.get(fkey);
+    describe('#.foundation', () => {
+        it('should get right item by cmdId string', () => {
+            foundKeys.forEach((fkey) => {
+                const hitA = zclId.foundation(fkey);
+                const hitB = zclId.foundationId.get(fkey);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -203,10 +176,10 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cmdId number', function () {
-            foundVals.forEach(function (fval) {
-                var hitA = zclId.foundation(fval),
-                    hitB = zclId.foundationId.get(fval);
+        it('should get right item by cmdId number', () => {
+            foundVals.forEach((fval) => {
+                const hitA = zclId.foundation(fval);
+                const hitB = zclId.foundationId.get(fval);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -214,26 +187,22 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if cmdId not found', function () {
+        it('should get undefined if cmdId not found', () => {
             expect(zclId.foundation('xxx')).to.be.undefined;
             expect(zclId.foundation(12345)).to.be.undefined;
         });
     });
 
-    describe('#.functional', function() {
-        it('should get right item by cId string and cmdId string', function () {
-            cIdKeys.forEach(function (ckey) {
+    describe('#.functional', () => {
+        it('should get right item by cId string and cmdId string', () => {
+            cIdKeys.forEach((ckey) => {
                 if (!clusterDefs[ckey]) return;
 
-                var cmdIdKeys = [];
+                const cmdIdKeys = Object.keys(clusterDefs[ckey].cmd || {});
 
-                for (k in clusterDefs[ckey].cmd) {
-                    cmdIdKeys.push(k);
-                }
-
-                cmdIdKeys.forEach(function (cmdkey) {
-                    var hitA = zclId.functional(ckey, cmdkey),
-                        hitB = zclId[ckey].cmd.get(cmdkey);
+                cmdIdKeys.forEach((cmdkey) => {
+                    const hitA = zclId.functional(ckey, cmdkey);
+                    const hitB = zclId[ckey].cmd.get(cmdkey);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -242,19 +211,15 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId string and cmdId number', function () {
-            cIdKeys.forEach(function (ckey) {
+        it('should get right item by cId string and cmdId number', () => {
+            cIdKeys.forEach((ckey) => {
                 if (!clusterDefs[ckey]) return;
 
-                var cmdIdVals = [];
+                const cmdIdVals = Object.keys(clusterDefs[ckey].cmd || {});
 
-                for (k in clusterDefs[ckey].cmd) {
-                    cmdIdVals.push(clusterDefs[ckey].cmd[k]);
-                }
-
-                cmdIdVals.forEach(function (cmdval) {
-                    var hitA = zclId.functional(ckey, cmdval),
-                        hitB = zclId[ckey].cmd.get(cmdval);
+                cmdIdVals.forEach((cmdval) => {
+                    const hitA = zclId.functional(ckey, cmdval);
+                    const hitB = zclId[ckey].cmd.get(cmdval);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -263,21 +228,17 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number and cmdId string', function () {
-            cIdVals.forEach(function (cval) {
-                var cId = zclId.cluster(cval);
+        it('should get right item by cId number and cmdId string', () => {
+            cIdVals.forEach((cval) => {
+                const cId = zclId.cluster(cval);
 
                 if (!clusterDefs[cId.key]) return;
 
-                var cmdIdKeys = [];
+                const cmdIdKeys = Object.keys(clusterDefs[cId.key].cmd || {});
 
-                for (k in clusterDefs[cId.key].cmd) {
-                    cmdIdKeys.push(k);
-                }
-
-                cmdIdKeys.forEach(function (cmdkey) {
-                    var hitA = zclId.functional(cval, cmdkey),
-                        hitB = zclId[cId.key].cmd.get(cmdkey);
+                cmdIdKeys.forEach((cmdkey) => {
+                    const hitA = zclId.functional(cval, cmdkey);
+                    const hitB = zclId[cId.key].cmd.get(cmdkey);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -286,21 +247,17 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number and cmdId number', function () {
-            cIdVals.forEach(function (cval) {
-                var cId = zclId.cluster(cval);
+        it('should get right item by cId number and cmdId number', () => {
+            cIdVals.forEach((cval) => {
+                const cId = zclId.cluster(cval);
 
                 if (!clusterDefs[cId.key]) return;
 
-                var cmdIdVals = [];
+                const cmdIdVals = Object.values(clusterDefs[cId.key].cmd || {});
 
-                for (k in clusterDefs[cId.key].cmd) {
-                    cmdIdVals.push(clusterDefs[cId.key].cmd[k]);
-                }
-
-                cmdIdVals.forEach(function (cmdval) {
-                    var hitA = zclId.functional(cval, cmdval),
-                        hitB = zclId[cId.key].cmd.get(cmdval);
+                cmdIdVals.forEach((cmdval) => {
+                    const hitA = zclId.functional(cval, cmdval);
+                    const hitB = zclId[cId.key].cmd.get(cmdval);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -309,14 +266,14 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if target not found', function () {
+        it('should get undefined if target not found', () => {
             expect(zclId.functional('genOnOff', 'dddd')).to.be.undefined;
             expect(zclId.functional('genOnOff', 12345)).to.be.undefined;
             expect(zclId.functional(3, 'dddd')).to.be.undefined;
             expect(zclId.functional(3, 12345)).to.be.undefined;
         });
 
-        it('should get an item if target is found', function () {
+        it('should get an item if target is found', () => {
             expect(zclId.functional('genOnOff', 'toggle')).not.to.be.undefined;
             expect(zclId.functional('genOnOff', 2)).not.to.be.undefined;
             expect(zclId.functional(6, 'toggle')).not.to.be.undefined;
@@ -324,20 +281,16 @@ describe('Module Methods Check', function() {
         });
     });
 
-    describe('#.getCmdRsp', function() {
-        it('should get right item by cId string and cmdId string', function () {
-            cIdKeys.forEach(function (ckey) {
+    describe('#.getCmdRsp', () => {
+        it('should get right item by cId string and cmdId string', () => {
+            cIdKeys.forEach((ckey) => {
                 if (!clusterDefs[ckey]) return;
 
-                var cmdIdKeys = [];
+                const cmdIdKeys = Object.keys(clusterDefs[ckey].cmdRsp || {});
 
-                for (k in clusterDefs[ckey].cmdRsp) {
-                    cmdIdKeys.push(k);
-                }
-
-                cmdIdKeys.forEach(function (cmdkey) {
-                    var hitA = zclId.getCmdRsp(ckey, cmdkey),
-                        hitB = zclId[ckey].cmdRsp.get(cmdkey);
+                cmdIdKeys.forEach((cmdkey) => {
+                    const hitA = zclId.getCmdRsp(ckey, cmdkey);
+                    const hitB = zclId[ckey].cmdRsp.get(cmdkey);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -346,19 +299,15 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId string and cmdId number', function () {
-            cIdKeys.forEach(function (ckey) {
+        it('should get right item by cId string and cmdId number', () => {
+            cIdKeys.forEach((ckey) => {
                 if (!clusterDefs[ckey]) return;
 
-                var cmdIdVals = [];
+                const cmdIdVals = Object.values(clusterDefs[ckey].cmdRsp || {});
 
-                for (k in clusterDefs[ckey].cmdRsp) {
-                    cmdIdVals.push(clusterDefs[ckey].cmdRsp[k]);
-                }
-
-                cmdIdVals.forEach(function (cmdval) {
-                    var hitA = zclId.getCmdRsp(ckey, cmdval),
-                        hitB = zclId[ckey].cmdRsp.get(cmdval);
+                cmdIdVals.forEach((cmdval) => {
+                    const hitA = zclId.getCmdRsp(ckey, cmdval);
+                    const hitB = zclId[ckey].cmdRsp.get(cmdval);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -367,21 +316,17 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number and cmdId string', function () {
-            cIdVals.forEach(function (cval) {
-                var cId = zclId.cluster(cval);
+        it('should get right item by cId number and cmdId string', () => {
+            cIdVals.forEach((cval) => {
+                const cId = zclId.cluster(cval);
 
                 if (!clusterDefs[cId.key]) return;
 
-                var cmdIdKeys = [];
+                const cmdIdKeys = Object.keys(clusterDefs[cId.key].cmdRsp || {});
 
-                for (k in clusterDefs[cId.key].cmdRsp) {
-                    cmdIdKeys.push(k);
-                }
-
-                cmdIdKeys.forEach(function (cmdkey) {
-                    var hitA = zclId.getCmdRsp(cval, cmdkey),
-                        hitB = zclId[cId.key].cmdRsp.get(cmdkey);
+                cmdIdKeys.forEach((cmdkey) => {
+                    const hitA = zclId.getCmdRsp(cval, cmdkey);
+                    const hitB = zclId[cId.key].cmdRsp.get(cmdkey);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -390,21 +335,17 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number and cmdId number', function () {
-            cIdVals.forEach(function (cval) {
-                var cId = zclId.cluster(cval);
+        it('should get right item by cId number and cmdId number', () => {
+            cIdVals.forEach((cval) => {
+                const cId = zclId.cluster(cval);
 
                 if (!clusterDefs[cId.key]) return;
 
-                var cmdIdVals = [];
+                const cmdIdVals = Object.values(clusterDefs[cId.key].cmdRsp || {});
 
-                for (k in clusterDefs[cId.key].cmdRsp) {
-                    cmdIdVals.push(clusterDefs[cId.key].cmdRsp[k]);
-                }
-
-                cmdIdVals.forEach(function (cmdval) {
-                    var hitA = zclId.getCmdRsp(cval, cmdval),
-                        hitB = zclId[cId.key].cmdRsp.get(cmdval);
+                cmdIdVals.forEach((cmdval) => {
+                    const hitA = zclId.getCmdRsp(cval, cmdval);
+                    const hitB = zclId[cId.key].cmdRsp.get(cmdval);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -413,14 +354,14 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if target not found', function () {
+        it('should get undefined if target not found', () => {
             expect(zclId.getCmdRsp('ssIasZone', 'dddd')).to.be.undefined;
             expect(zclId.getCmdRsp('ssIasZone', 12345)).to.be.undefined;
             expect(zclId.getCmdRsp(1280, 'dddd')).to.be.undefined;
             expect(zclId.getCmdRsp(1280, 12345)).to.be.undefined;
         });
 
-        it('should get an item if target is found', function () {
+        it('should get an item if target is found', () => {
             expect(zclId.getCmdRsp('ssIasZone', 'enrollReq')).not.to.be.undefined;
             expect(zclId.getCmdRsp('ssIasZone', 1)).not.to.be.undefined;
             expect(zclId.getCmdRsp(1280, 'enrollReq')).not.to.be.undefined;
@@ -428,20 +369,16 @@ describe('Module Methods Check', function() {
         });
     });
 
-    describe('#.attr', function() {
-        it('should get right item by cId string and attrId string', function () {
-            cIdKeys.forEach(function (ckey) {
+    describe('#.attr', () => {
+        it('should get right item by cId string and attrId string', () => {
+            cIdKeys.forEach((ckey) => {
                 if (!clusterDefs[ckey]) return;
 
-                var attrIdKeys = [];
+                const attrIdKeys = Object.keys(clusterDefs[ckey].attrId || {});
 
-                for (k in clusterDefs[ckey].attrId) {
-                    attrIdKeys.push(k);
-                }
-
-                attrIdKeys.forEach(function (akey) {
-                    var hitA = zclId.attr(ckey, akey),
-                        hitB = zclId[ckey].attr.get(akey);
+                attrIdKeys.forEach((akey) => {
+                    const hitA = zclId.attr(ckey, akey);
+                    const hitB = zclId[ckey].attr.get(akey);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -450,19 +387,16 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId string and attrId number', function () {
-            cIdKeys.forEach(function (ckey) {
+        it('should get right item by cId string and attrId number', () => {
+            cIdKeys.forEach((ckey) => {
                 if (!clusterDefs[ckey]) return;
 
-                var attrIdVals = [];
+                const attrIdVals = Object.values(clusterDefs[ckey].attrId || {})
+                    .map((attr) => attr.id);
 
-                for (k in clusterDefs[ckey].attrId) {
-                    attrIdVals.push(clusterDefs[ckey].attrId[k].id);
-                }
-
-                attrIdVals.forEach(function (aval) {
-                    var hitA = zclId.attr(ckey, aval),
-                        hitB = zclId[ckey].attr.get(aval);
+                attrIdVals.forEach((aval) => {
+                    const hitA = zclId.attr(ckey, aval);
+                    const hitB = zclId[ckey].attr.get(aval);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -471,21 +405,17 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number and attrId string', function () {
-            cIdVals.forEach(function (cval) {
-                var cId = zclId.cluster(cval);
+        it('should get right item by cId number and attrId string', () => {
+            cIdVals.forEach((cval) => {
+                const cId = zclId.cluster(cval);
 
                 if (!clusterDefs[cId.key]) return;
 
-                var attrIdKeys = [];
+                const attrIdKeys = Object.keys(clusterDefs[cId.key].attrId || {});
 
-                for (k in clusterDefs[cId.key].attrId) {
-                    attrIdKeys.push(k);
-                }
-
-                attrIdKeys.forEach(function (akey) {
-                    var hitA = zclId.attr(cval, akey),
-                        hitB = zclId[cId.key].attr.get(akey);
+                attrIdKeys.forEach((akey) => {
+                    const hitA = zclId.attr(cval, akey);
+                    const hitB = zclId[cId.key].attr.get(akey);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -494,21 +424,18 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number and attrId number', function () {
-            cIdVals.forEach(function (cval) {
-                var cId = zclId.cluster(cval);
+        it('should get right item by cId number and attrId number', () => {
+            cIdVals.forEach((cval) => {
+                const cId = zclId.cluster(cval);
 
                 if (!clusterDefs[cId.key]) return;
 
-                var attrIdVals = [];
+                const attrIdVals = Object.values(clusterDefs[cId.key].attrId || {})
+                    .map((attr) => attr.id);
 
-                for (k in clusterDefs[cId.key].attrId) {
-                    attrIdVals.push(clusterDefs[cId.key].attrId[k].id);
-                }
-
-                attrIdVals.forEach(function (aval) {
-                    var hitA = zclId.attr(cval, aval),
-                        hitB = zclId[cId.key].attr.get(aval);
+                attrIdVals.forEach((aval) => {
+                    const hitA = zclId.attr(cval, aval);
+                    const hitB = zclId[cId.key].attr.get(aval);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -517,14 +444,14 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if target not found', function () {
+        it('should get undefined if target not found', () => {
             expect(zclId.attr('genBasic', 'dddd')).to.be.undefined;
             expect(zclId.attr('genBasic', 12345)).to.be.undefined;
             expect(zclId.attr(3, 'dddd')).to.be.undefined;
             expect(zclId.attr(3, 12345)).to.be.undefined;
         });
 
-        it('should get an item if target is found', function () {
+        it('should get an item if target is found', () => {
             expect(zclId.attr('genBasic', 'zclVersion')).not.to.be.undefined;
             expect(zclId.attr('genBasic', 0)).not.to.be.undefined;
             expect(zclId.attr(0, 'zclVersion')).not.to.be.undefined;
@@ -532,21 +459,17 @@ describe('Module Methods Check', function() {
         });
     });
 
-    describe('#.attrType', function() {
-        it('should get right item by cId string and attrId string', function () {
-            cIdKeys.forEach(function (ckey) {
+    describe('#.attrType', () => {
+        it('should get right item by cId string and attrId string', () => {
+            cIdKeys.forEach((ckey) => {
                 if (!clusterDefs[ckey]) return;
 
-                var attrIdKeys = [];
+                const attrIdKeys = Object.keys(clusterDefs[ckey].attrId || {});
 
-                for (k in clusterDefs[ckey].attrId) {
-                    attrIdKeys.push(k);
-                }
-
-                attrIdKeys.forEach(function (akey) {
-                    var dataType = zclId[ckey].attrType.get(akey),
-                        hitA = zclId.attrType(ckey, akey),
-                        hitB = zclId.dataType(dataType.value);
+                attrIdKeys.forEach((akey) => {
+                    const dataType = zclId[ckey].attrType.get(akey);
+                    const hitA = zclId.attrType(ckey, akey);
+                    const hitB = zclId.dataType(dataType.value);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -555,21 +478,18 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId string and attrId number', function () {
-            cIdKeys.forEach(function (ckey) {
+        it('should get right item by cId string and attrId number', () => {
+            cIdKeys.forEach((ckey) => {
                 if (!clusterDefs[ckey]) return;
 
-                var attrIdVals = [];
+                const attrIdVals = Object.values(clusterDefs[ckey].attrId || {})
+                    .map((attr) => attr.id);
 
-                for (k in clusterDefs[ckey].attrId) {
-                    attrIdVals.push(clusterDefs[ckey].attrId[k].id);
-                }
-
-                attrIdVals.forEach(function (aval) {
-                    var attrId = zclId.attr(ckey, aval),
-                        dataType = zclId[ckey].attrType.get(attrId.key),
-                        hitA = zclId.attrType(ckey, aval),
-                        hitB = zclId.dataType(dataType.value);
+                attrIdVals.forEach((aval) => {
+                    const attrId = zclId.attr(ckey, aval);
+                    const dataType = zclId[ckey].attrType.get(attrId.key);
+                    const hitA = zclId.attrType(ckey, aval);
+                    const hitB = zclId.dataType(dataType.value);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -578,22 +498,18 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number and attrId string', function () {
-            cIdVals.forEach(function (cval) {
-                var cId = zclId.cluster(cval);
+        it('should get right item by cId number and attrId string', () => {
+            cIdVals.forEach((cval) => {
+                const cId = zclId.cluster(cval);
 
                 if (!clusterDefs[cId.key]) return;
 
-                var attrIdKeys = [];
+                const attrIdKeys = Object.keys(clusterDefs[cId.key].attrId | {});
 
-                for (k in clusterDefs[cId.key].attrId) {
-                    attrIdKeys.push(k);
-                }
-
-                attrIdKeys.forEach(function (akey) {
-                    var dataType = zclId[cId.key].attrType.get(akey),
-                        hitA = zclId.attrType(cval, akey),
-                        hitB = zclId.dataType(dataType.value);
+                attrIdKeys.forEach((akey) => {
+                    const dataType = zclId[cId.key].attrType.get(akey);
+                    const hitA = zclId.attrType(cval, akey);
+                    const hitB = zclId.dataType(dataType.value);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -602,23 +518,20 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by cId number and attrId number', function () {
-            cIdVals.forEach(function (cval) {
-                var cId = zclId.cluster(cval);
+        it('should get right item by cId number and attrId number', () => {
+            cIdVals.forEach((cval) => {
+                const cId = zclId.cluster(cval);
 
                 if (!clusterDefs[cId.key]) return;
 
-                var attrIdVals = [];
+                const attrIdVals = Object.values(clusterDefs[cId.key].attrId)
+                    .map((attr) => attr.id);
 
-                for (k in clusterDefs[cId.key].attrId) {
-                    attrIdVals.push(clusterDefs[cId.key].attrId[k].id);
-                }
-
-                attrIdVals.forEach(function (aval) {
-                    var attrId = zclId.attr(cval, aval),
-                        dataType = zclId[cId.key].attrType.get(attrId.key),
-                        hitA = zclId.attrType(cval, aval),
-                        hitB = zclId.dataType(dataType.value);
+                attrIdVals.forEach((aval) => {
+                    const attrId = zclId.attr(cval, aval);
+                    const dataType = zclId[cId.key].attrType.get(attrId.key);
+                    const hitA = zclId.attrType(cval, aval);
+                    const hitB = zclId.dataType(dataType.value);
 
                     expect(hitA).not.to.be.undefined;
                     expect(hitA.key).to.be.eql(hitB.key);
@@ -627,14 +540,14 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if target not found', function () {
+        it('should get undefined if target not found', () => {
             expect(zclId.attrType('genBasic', 'dddd')).to.be.undefined;
             expect(zclId.attrType('genBasic', 12345)).to.be.undefined;
             expect(zclId.attrType(3, 'dddd')).to.be.undefined;
             expect(zclId.attrType(3, 12345)).to.be.undefined;
         });
 
-        it('should get an item if target is found', function () {
+        it('should get an item if target is found', () => {
             expect(zclId.attr('genBasic', 'zclVersion')).not.to.be.undefined;
             expect(zclId.attr('genBasic', 0)).not.to.be.undefined;
             expect(zclId.attr(0, 'zclVersion')).not.to.be.undefined;
@@ -642,11 +555,11 @@ describe('Module Methods Check', function() {
         });
     });
 
-    describe('#.dataType', function() {
-        it('should get right item by type string', function () {
-            dataTypeKeys.forEach(function (dkey) {
-                var hitA = zclId.dataType(dkey),
-                    hitB = zclId.dataTypeId.get(dkey);
+    describe('#.dataType', () => {
+        it('should get right item by type string', () => {
+            dataTypeKeys.forEach((dkey) => {
+                const hitA = zclId.dataType(dkey);
+                const hitB = zclId.dataTypeId.get(dkey);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -654,10 +567,10 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by type number', function () {
-            dataTypeVals.forEach(function (dval) {
-                var hitA = zclId.dataType(dval),
-                    hitB = zclId.dataTypeId.get(dval);
+        it('should get right item by type number', () => {
+            dataTypeVals.forEach((dval) => {
+                const hitA = zclId.dataType(dval);
+                const hitB = zclId.dataTypeId.get(dval);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -665,17 +578,17 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if type not found', function () {
+        it('should get undefined if type not found', () => {
             expect(zclId.dataType('xxx')).to.be.undefined;
             expect(zclId.dataType(12345)).to.be.undefined;
         });
     });
 
-    describe('#.status', function () {
-        it('should get right item by type string', function () {
-            statusKeys.forEach(function (dkey) {
-                var hitA = zclId.status(dkey),
-                    hitB = zclId.statusId.get(dkey);
+    describe('#.status', () => {
+        it('should get right item by type string', () => {
+            statusKeys.forEach((dkey) => {
+                const hitA = zclId.status(dkey);
+                const hitB = zclId.statusId.get(dkey);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -683,10 +596,10 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get right item by type number', function () {
-            statusVals.forEach(function (dval) {
-                var hitA = zclId.status(dval),
-                    hitB = zclId.statusId.get(dval);
+        it('should get right item by type number', () => {
+            statusVals.forEach((dval) => {
+                const hitA = zclId.status(dval);
+                const hitB = zclId.statusId.get(dval);
 
                 expect(hitA).not.to.be.undefined;
                 expect(hitA.key).to.be.eql(hitB.key);
@@ -694,43 +607,97 @@ describe('Module Methods Check', function() {
             });
         });
 
-        it('should get undefined if type not found', function () {
+        it('should get undefined if type not found', () => {
             expect(zclId.status('xxx')).to.be.undefined;
             expect(zclId.status(12345)).to.be.undefined;
         });
     });
 
-    describe('#.attrList', function () {
-        it('should get right list by cluster string id', function () {
+    describe('#.attrList', () => {
+        it('should get right list by cluster string id', () => {
             expect(zclId.attrList('genDeviceTempCfg')).to.be.deep.equal([
-                { attrId: 0, dataType: 41 },
-                { attrId: 1, dataType: 41 },
-                { attrId: 2, dataType: 41 },
-                { attrId: 3, dataType: 33 },
-                { attrId: 16, dataType: 24 },
-                { attrId: 17, dataType: 41 },
-                { attrId: 18, dataType: 41 },
-                { attrId: 19, dataType: 34 },
-                { attrId: 20, dataType: 34 }
+                {
+                    attrId: 0,
+                    dataType: 41,
+                },
+                {
+                    attrId: 1,
+                    dataType: 41,
+                },
+                {
+                    attrId: 2,
+                    dataType: 41,
+                },
+                {
+                    attrId: 3,
+                    dataType: 33,
+                },
+                {
+                    attrId: 16,
+                    dataType: 24,
+                },
+                {
+                    attrId: 17,
+                    dataType: 41,
+                },
+                {
+                    attrId: 18,
+                    dataType: 41,
+                },
+                {
+                    attrId: 19,
+                    dataType: 34,
+                },
+                {
+                    attrId: 20,
+                    dataType: 34,
+                },
             ]);
         });
 
-        it('should get right list by cluster numeric id', function () {
+        it('should get right list by cluster numeric id', () => {
             expect(zclId.attrList(2)).to.be.deep.equal([
-                { attrId: 0, dataType: 41 },
-                { attrId: 1, dataType: 41 },
-                { attrId: 2, dataType: 41 },
-                { attrId: 3, dataType: 33 },
-                { attrId: 16, dataType: 24 },
-                { attrId: 17, dataType: 41 },
-                { attrId: 18, dataType: 41 },
-                { attrId: 19, dataType: 34 },
-                { attrId: 20, dataType: 34 }
+                {
+                    attrId: 0,
+                    dataType: 41,
+                },
+                {
+                    attrId: 1,
+                    dataType: 41,
+                },
+                {
+                    attrId: 2,
+                    dataType: 41,
+                },
+                {
+                    attrId: 3,
+                    dataType: 33,
+                },
+                {
+                    attrId: 16,
+                    dataType: 24,
+                },
+                {
+                    attrId: 17,
+                    dataType: 41,
+                },
+                {
+                    attrId: 18,
+                    dataType: 41,
+                },
+                {
+                    attrId: 19,
+                    dataType: 34,
+                },
+                {
+                    attrId: 20,
+                    dataType: 34,
+                },
             ]);
         });
 
 
-        it('should be undefined if cluster not found', function () {
+        it('should be undefined if cluster not found', () => {
             expect(zclId.attrList('genDeviceTempCfgxx')).to.be.undefined;
         });
     });
