@@ -39,7 +39,12 @@
         "readStruct": 14,
         "writeStrcut": 15,
         "writeStrcutRsp": 16,
-        "max": 17
+        "discoverCmdsRec": 17,
+        "discoverCmdsRecRsp": 18,
+        "discoverCmdsGen": 19,
+        "discoverCmdsGenRsp": 20,
+        "discoverAttrsExt": 21,
+        "discoverAttrsExtRsp": 22
     },
     "cmdDirection": {
         "SERVER_GENERATED": 1,
@@ -121,6 +126,9 @@
         "genApplianceCtrl": 27,
         "genPollCtrl": 32,
         "genGreenPowerProxy": 33,
+        "mobileDeviceCfg": 34,
+        "neighborCleaning": 35,
+        "nearestGateway": 36,
         "closuresShadeCfg": 256,
         "closuresDoorLock": 257,
         "closuresWindowCovering": 258,
@@ -162,6 +170,8 @@
         "piMultistateValueReg": 1554,
         "piMultistateValueExt": 1555,
         "pi11073ProtocolTunnel": 1556,
+        "piIso7818ProtocolTunnel": 1557,
+        "piRetailTunnel": 1559,
         "sePrice": 1792,
         "seDrlc": 1793,
         "seMetering": 1794,
@@ -174,6 +184,9 @@
         "seEvents": 1801,
         "seMduPairing": 1802,
         "seKeyEstablishment": 2048,
+        "telecommunicationsInformation": 2304,
+        "telecommunicationsVoiceOverZigbee": 2308,
+        "telecommunicationsChatting": 2309,
         "haApplianceIdentification": 2816,
         "haMeterIdentification": 2817,
         "haApplianceEventsAlerts": 2818,
@@ -234,6 +247,7 @@
         "tod": 224,
         "date": 225,
         "utc": 226,
+        "clusterId": 232,
         "attrId": 233,
         "bacOid": 234,
         "ieeeAddr": 240,
@@ -269,7 +283,11 @@
         "invalidImage": 150,
         "waitForData": 151,
         "noImageAvailable": 152,
-        "requireMoreImage": 153
+        "requireMoreImage": 153,
+        "notificationPending": 154,
+        "hardwareFailure": 192,
+        "softwareFailure": 193,
+        "calibrationError": 194,
+        "unsupportedCluster": 195
     }
 }
-

@@ -36,7 +36,7 @@
   "homepage": "https://github.com/zigbeer/zcl-id#readme",
   "dependencies": {
     "busyman": "^0.3.0",
-    "enum": "^2.3.0"
+    "enum": "^2.5.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
