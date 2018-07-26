@@ -311,8 +311,8 @@
             "imageTypeId":{"id":8,"type":"uint16"},
             "minimumBlockReqDelay":{"id":9,"type":"uint16"},
             "imageStamp":{"id":10,"type":"uint32"}},
-        "cmd":{"queryNextImageReq":1,"imageBlockReq":3,"imagePageReq":4,"upgradeEndReq":6,"querySpecificFileReq":8},
-        "cmdRsp":{"imageNotify":0,"queryNextImageRsp":2,"imageBlockRsp":5,"upgradeEndRsp":7,"querySpecificFileRsp":9}},
+        "cmd":{"imageNotify":0,"queryNextImageReq":1,"queryNextImageRsp":2,"imageBlockReq":3,"imagePageReq":4,"imageBlockRsp":5,"upgradeEndReq":6,"upgradeEndRsp":7,"querySpecificFileReq":8,"querySpecificFileRsp":9},
+        "cmdRsp":{"imageNotify":0,"queryNextImageReq":1,"queryNextImageRsp":2,"imageBlockReq":3,"imagePageReq":4,"imageBlockRsp":5,"upgradeEndReq":6,"upgradeEndRsp":7,"querySpecificFileReq":8,"querySpecificFileRsp":9}},
     "genPollCtrl": {
         "attrId":{
             "checkinInterval":{"id":0,"type":"uint32"},
@@ -325,6 +325,23 @@
             "physicalClosedLimit":{"id":0,"type":"uint16"}},
         "cmd":{"checkinRsp":0,"fastPollStop":1,"setLongPollInterval":2,"setShortPollInterval":3},
         "cmdRsp":{"checkin":0}},
+    "mobileDeviceCfg": {
+        "attrId":{
+            "keepAliveTime":{"id":0,"type":"uint16"},
+            "rejoinTimeout":{"id":1,"type":"uint16"}},
+        "cmd":null,
+        "cmdRsp":{"keepAliveNotification":0}},
+    "neighborCleaning": {
+        "attrId":{
+            "neighborCleaningTimeout":{"id":0,"type":"uint16"}},
+        "cmd":{"purgeEntries":0},
+        "cmdRsp":null},
+    "nearestGateway": {
+        "attrId":{
+            "nearestGateway":{"id":0,"type":"uint16"},
+            "newMobileNode":{"id":1,"type":"uint16"}},
+        "cmd":null,
+        "cmdRsp":null},
     "closuresShadeCfg": {
         "attrId":{
             "physicalClosedLimit":{"id":0,"type":"uint16"},
@@ -896,6 +913,17 @@
             "idleTimeout":{"id":5,"type":"uint16"}},
         "cmd":{"transferApdu":0,"connectReq":1,"disconnectReq":2,"connectStatusNoti":3},
         "cmdRsp":null},
+    "piIso7818ProtocolTunnel": {
+        "attrId":{
+            "status":{"id":0,"type":"uint8"}},
+        "cmd":{"transferApdu":0,"insertSmartCard":1,"extractSmartCard":2},
+        "cmdRsp":{"transferApdu":0}},
+    "piRetailTunnel": {
+        "attrId":{
+            "manufacturerCode":{"id":0,"type":"uint16"},
+            "msProfile":{"id":1,"type":"uint16"}},
+        "cmd":{"transferApdu":0},
+        "cmdRsp":null},
     "seMetering": {
         "attrId":{
             "currentSummDelivered":{"id":0,"type":"uint48"},
@@ -1029,6 +1057,40 @@
             "changeReportingProfile":{"id":256,"type":"unknown"}},
         "cmd":{"getProfile":0,"reqMirror":1,"mirrorRem":2,"reqFastPollMode":3,"getSnapshot":4,"takeSnapshot":5,"mirrorReportAttrRsp":6},
         "cmdRsp":{"getProfileRsp":0,"reqMirrorRsp":1,"mirrorRemRsp":2,"reqFastPollModeRsp":3,"getSnapshotRsp":4}},
+    "telecommunicationsInformation": {
+        "attrId":{
+            "nodeDescription":{"id":0,"type":"charStr"},
+            "deliveryEnable":{"id":1,"type":"boolean"},
+            "pushInformationTimer":{"id":2,"type":"uint32"},
+            "enableSecureConfiguration":{"id":3,"type":"boolean"},
+            "numberOfContents":{"id":16,"type":"uint16"},
+            "contentRootID":{"id":17,"type":"uint16"}},
+        "cmd":{"reqInformation":0,"pushInformationRsp":1,"sendPreference":2,"reqPreferenceRsp":3,"update":4,"delete":5,"cfgNodeDescription":6,"cfgDeliveryEnable":7,"cfgPushInformationTimer":8,"cfgSetRootID":9},
+        "cmdRsp":{"reqInformationRsp":0,"pushInformation":1,"sendPreferenceRsp":2,"serverReqPreference":3,"reqPreferenceConfirmation":4,"updateRsp":5,"deleteRsp":6}},
+    "telecommunicationsVoiceOverZigbee": {
+        "attrId":{
+            "codecType":{"id":0,"type":"enum8"},
+            "samplingFrequency":{"id":1,"type":"enum8"},
+            "codecrate":{"id":2,"type":"enum8"},
+            "establishmentTimeout":{"id":3,"type":"uint8"},
+            "codecTypeSub1":{"id":4,"type":"enum8"},
+            "codecTypeSub2":{"id":5,"type":"enum8"},
+            "codecTypeSub3":{"id":6,"type":"enum8"},
+            "compressionType":{"id":7,"type":"enum8"},
+            "compressionRate":{"id":8,"type":"enum8"},
+            "optionFlags":{"id":9,"type":"bitmap8"},
+            "threshold":{"id":10,"type":"uint8"}},
+        "cmd":{"establishmentReq":0,"voiceTransmission":1,"voiceTransmissionCompletion":2,"controlResponse":3},
+        "cmdRsp":{"establishmentResponse":0,"voiceTransmissionResponse":1,"control":2}},
+    "telecommunicationsChatting": {
+        "attrId":{
+            "uID":{"id":0,"type":"uint16"},
+            "nickname":{"id":1,"type":"charStr"},
+            "cID":{"id":16,"type":"uint16"},
+            "name":{"id":17,"type":"charStr"},
+            "enableAddChat":{"id":18,"type":"boolean"}},
+        "cmd":{"joinChatReq":0,"leaveChatReq":1,"searchChatReq":2,"switchChairmanRsp":3,"startChatReq":4,"chatMessage":5,"getNodeInformationReq":6},
+        "cmdRsp":{"startChatRsp":0,"joinChatRsp":1,"userLeft":2,"userJoined":3,"searchChatRsp":4,"switchChairmanReq":5,"switchChairmanConfirm":6,"switchChairmanNotification":7,"getNodeInformationRsp":8}},
     "haApplianceIdentification": {
         "attrId":{
             "basicIdentification":{"id":0,"type":"uint56"},
@@ -1239,5 +1301,9 @@
             "lastMessageLqi":{"id":284,"type":"uint8"},
             "lastMessageRssi":{"id":285,"type":"int8"}},
         "cmd":null,
-        "cmdRsp":null}
+        "cmdRsp":null},
+    "lightLink": {
+        "attrId":null,
+        "cmd":{"scanReq":0,"deviceInformationReq":2,"identifyReq":6,"resetToFactoryNewReq":7,"networkStartReq":16,"networkJoinRouterReq":18,"networkJoinEndDeviceReq":20,"networkUpdateReq":22,"getGroupIdentifiersReq":65,"getEndpointListReq":66},
+        "cmdRsp":{"scanRsp":1,"deviceInformationRsp":3,"networkStartRsp":17,"networkJoinRouterRsp":19,"networkJoinEndDeviceRsp":21,"endpointInformation":64,"getGroupIdentifiersRsp":65,"getEndpointListRsp":66}}
 }
