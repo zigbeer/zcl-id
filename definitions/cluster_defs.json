@@ -1031,6 +1031,8 @@
             "curYearMaxEnergyCarrDemand":{"id":1045,"type":"int24"},
             "curYearMinEnergyCarrDemand":{"id":1046,"type":"int24"},
             "maxNumberOfPeriodsDelivered":{"id":1280,"type":"uint8"},
+            "currentSummDeliveredMultiplier":{"id":1401,"type":"uint24"},
+            "currentSummDeliveredDivisor":{"id":1402,"type":"uint24"},
             "current_Demand_Delivered":{"id":1536,"type":"uint24"},
             "demandLimit":{"id":1537,"type":"uint24"},
             "demandIntegrationPeriod":{"id":1538,"type":"uint8"},
